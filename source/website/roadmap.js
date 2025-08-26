@@ -94,3 +94,36 @@ function formatDate(date) {
   
   renderRoadmap();
   
+
+  document.getElementById('add-task-btn').addEventListener('click', () => {
+    const input = document.getElementById('new-task-input');
+    const text = input.value.trim();
+  
+    if (text === "") {
+      alert("Please enter a task description.");
+      return;
+    }
+  
+    // Create new task object
+    const newTask = {
+      text: text,
+      created: Date.now(),
+      done: false,
+      doneAt: ""
+    };
+  
+    // Add to roadmap and save
+    roadmap.push(newTask);
+    saveRoadmap();
+  
+    // Clear input and re-render list
+    input.value = "";
+    renderRoadmap();
+  });
+  
+  // Optional: Allow pressing Enter to add task
+  document.getElementById('new-task-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      document.getElementById('add-task-btn').click();
+    }
+  });

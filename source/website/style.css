@@ -252,3 +252,21 @@ footer {
 .stock-input button:hover {
   background-color: #1976d2;
 }
+
+.new-task {
+  margin-bottom: 1em;
+  display: flex;
+  gap: 0.5em;
+}
+
+#new-task-input {
+  flex-grow: 1;
+  padding: 0.5em;
+  font-size: 1em;
+}
+
+#add-task-btn {
+  padding: 0.5em 1em;
+  font-size: 1em;
+  cursor: pointer;
+}
