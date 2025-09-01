@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stock Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <nav>
+    <div class="logo"><strong>Your Name</strong></div>
+    <div class="nav-links">
+      <a href="frontpage.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="blog.html">Blog</a>
+    </div>
+  </nav>
+  <div class="stock-input">
+    <h2>Add New Stock</h2>
+    <form id="addStockForm">
+      <input type="text" id="stockSymbol" placeholder="Symbol (e.g. AAPL)" required />
+      <input type="number" step="0.01" id="entryValue" placeholder="Entry Value" required />
+      <button type="submit">Add Stock</button>
+    </form>
+  </div>
+  <div class="container">
+    <h1>Stock Dashboard</h1>
+
+    <div class="dashboard">
+      <div class="module" draggable="true" id="stock-list">
+        <h2>Tracked Stocks</h2>
+        <table>
+          <thead>
+            <tr><th>Symbol</th><th>Entry</th><th>Now</th><th>%</th><th>Graph</th></tr>
+          </thead>
+          <tbody id="stock-table"></tbody>
+        </table>
+      </div>
+
+      <div class="module hidden" id="graph-container">
+        <h2>Stock Graph</h2>
+        <canvas id="stockChart" width="400" height="200"></canvas>
+        <button onclick="toggleGraph()">Close</button>
+      </div>
+
+      <div class="module" draggable="true" id="pie-chart">
+        <h2>Portfolio Allocation</h2>
+        <canvas id="pieChart" width="300" height="300"></canvas>
+      </div>
+
+      <div class="module" draggable="true" id="total-assets">
+        <h2>Total Asset Evaluation</h2>
+        <p id="total-value">$0.00</p>
+        <p id="total-change" class="percent-change"></p>
+        <canvas id="totalChart" width="300" height="150"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Your Name. All rights reserved.
+  </footer>
+
+  <script>
+    // Your Alpha Vantage API Key
+    const apiKey = 'CD3OSDESE8WB6KOL';
+
+    // Initialize stocks with your real stock data
+    let stocks = [
+      { symbol: "SES", entry: 8.00, current: 8.00, quantity: 12, currency: "EUR" },
+      { symbol: "VANGUARD_FTSE_ALL_WORLD", entry: 120.00, current: 120.00, quantity: 20, currency: "EUR" }
+    ];
+
+    // Fetch the latest stock price from Alpha Vantage
+    async function fetchStockPrice(symbol) {
+      const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=1min&apikey=${apiKey}`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data["Time Series (1min)"]) {
+          const latestTimestamp = Object.keys(data["Time Series (1min)"])[0];
+          const latestData = data["Time Series (1min)"][latestTimestamp];
+          return parseFloat(latestData["4. close"]);  // '4. close' is the latest price
+        } else {
+          throw new Error("Invalid stock symbol or API error.");
+        }
+      } catch (error) {
+        console.error("Error fetching stock price:", error);
+        return null;
+      }
+    }
+
+    // Handle adding a new stock with auto-fetch of current value
+    document.getElementById("addStockForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const symbol = document.getElementById("stockSymbol").value.toUpperCase();
+      const entry = parseFloat(document.getElementById("entryValue").value);
+
+      const current = await fetchStockPrice(symbol);
+      if (!symbol || isNaN(entry) || current === null) return;
+
+      stocks.push({ symbol, entry, current, quantity: 1, currency: "EUR" });
+      saveStocks();
+      renderDashboard();
+      e.target.reset();
+    });
+
+    // Convert stock values to selected currency (for now assume "EUR")
+    async function convertToCurrency() {
+      const selectedCurrency = localStorage.getItem('currency') || "EUR";
+      const exchangeRate = await getExchangeRate("EUR", selectedCurrency); // Convert from EUR
+
+      stocks = stocks.map(stock => ({
+        ...stock,
+        current: (stock.current * exchangeRate).toFixed(2),
+        entry: (stock.entry * exchangeRate).toFixed(2),
+        currency: selectedCurrency,
+      }));
+    }
+
+    // Exchange rate (this function uses a dummy fixed rate for now)
+    async function getExchangeRate(fromCurrency, toCurrency) {
+      // Use an exchange rate API or hardcode rates for now
+      if (fromCurrency === "EUR" && toCurrency === "USD") {
+        return 1.1;  // Example exchange rate (EUR to USD)
+      }
+      return 1;  // Default to 1 if no exchange
+    }
+
+    // Save the stocks to localStorage
+    function saveStocks() {
+      localStorage.setItem('trackedStocks', JSON.stringify(stocks));
+    }
+
+    // Update the total value
+    async function updateTotalValue() {
+      let totalValue = 0;
+      let labels = [];
+      let values = [];
+
+      await convertToCurrency();  // Convert stock prices to selected currency
+
+      stocks.forEach(stock => {
+        totalValue += stock.current * stock.quantity;
+        labels.push(stock.symbol);
+        values.push(stock.current);
+      });
+
+      document.getElementById("total-value").textContent = `${totalValue} ${stocks[0].currency}`;
+      updatePieChart(labels, values);
+      updateTotalPerformanceChart(totalValue);
+    }
+
+    // Update pie chart with stock data
+    function updatePieChart(labels, values) {
+      const ctx = document.getElementById('pieChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: values,
+            backgroundColor: ['#4caf50', '#2196f3', '#ff9800', '#e91e63', '#9c27b0']
+          }]
+        }
+      });
+    }
+
+    // Update the total performance chart
+    function updateTotalPerformanceChart(totalValue) {
+      const historicalValues = Array.from({ length: 10 }, (_, i) =>
+        (totalValue * (1 + (Math.sin(i / 2) + Math.random() * 0.1) * 0.05)).toFixed(2)
+      );
+
+      const first = parseFloat(historicalValues[0]);
+      const last = parseFloat(historicalValues[historicalValues.length - 1]);
+      const changePercent = (((last - first) / first) * 100).toFixed(2);
+
+      const changeLabel = document.getElementById('total-change');
+      changeLabel.textContent = `${changePercent > 0 ? '+' : ''}${changePercent}%`;
+      changeLabel.className = changePercent >= 0 ? 'positive' : 'negative';
+
+      const ctx = document.getElementById('totalChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: Array.from({ length: 10 }, (_, i) => `Day ${i + 1}`),
+          datasets: [{
+            label: 'Total Value',
+            data: historicalValues,
+            fill: true,
+            backgroundColor: 'rgba(33, 150, 243, 0.1)',
+            borderColor: '#2196f3',
+            tension: 0.3
+          }]
+        }
+      });
+    }
+
+    // Render the dashboard with stock data
+    function renderDashboard() {
+      const stockList = document.getElementById("stock-table");
+      stockList.innerHTML = "";
+
+      stocks.forEach((stock, index) => {
+        const perf = (((stock.current - stock.entry) / stock.entry) * 100).toFixed(2);
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${stock.symbol}</td>
+          <td>${stock.entry} ${stock.currency}</td>
+          <td>${stock.current} ${stock.currency}</td>
+          <td class="${perf >= 0 ? 'positive' : 'negative'}">${perf}%</td>
+          <td>
+            <button onclick="showGraph('${stock.symbol}')">📊</button>
+          </td>
+        `;
+        stockList.appendChild(row);
+      });
+
+      updateTotalValue();
+    }
+
+    // Show the graph for a selected stock
+    function showGraph(symbol) {
+      const ctx = document.getElementById('stockChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+          datasets: [{
+            label: `Stock Price - ${symbol}`,
+            data: Array.from({ length: 10 }, () => Math.random() * 10 + 50),
+            borderColor: '#4caf50',
+            fill: false,
+          }]
+        }
+      });
+
+      document.getElementById("graph-container").classList.remove("hidden");
+    }
+
+    // Toggle visibility of the stock graph
+    function toggleGraph() {
+      document.getElementById("graph-container").classList.add("hidden");
+    }
+
+    // Initialize the dashboard when the page loads
+    renderDashboard();
+  </script>
+</body>
+</html>

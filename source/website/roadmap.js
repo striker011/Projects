@@ -15,7 +15,7 @@ function formatDate(date) {
       doneAt: ""
     },
     {
-      text: "Add user authentication (optional)",
+      text: " rework every session data to localStorage",
       created: Date.now(),
       done: false,
       doneAt: ""
