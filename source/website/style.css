@@ -8,6 +8,14 @@ body {
   color: #333;
 }
 
+.flex-container{
+ display:flex;
+}
+
+.flex-container > div{
+  margin: 10px;
+}
+
 nav {
   background-color: #222;
   color: white;
@@ -35,7 +43,7 @@ nav {
 }
 
 .dashboard {
-  display: grid;
+  display: flexbox;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1rem;
 }
@@ -306,3 +314,4 @@ pre.log {
 }
 
 .stock-input button:hover { background-color: #1976d2; }
+

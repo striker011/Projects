@@ -2,97 +2,27 @@
 // Schema uses the same database name as dashboard to avoid duplicates.
 // We bump to version 3 to add a 'roadmap_tasks' store and ensure other pages should also accept v3.
 
-const DB_NAME = 'cvdb';
-const DB_VERSION = 3;
-
-let db;
-
-function openDB() {
-  return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB_NAME, DB_VERSION);
-    req.onupgradeneeded = (e) => {
-      const db = req.result;
-
-      // existing stores from other pages (create if missing)
-      if (!db.objectStoreNames.contains('stocks')) db.createObjectStore('stocks', { keyPath:'wkn' });
-      if (!db.objectStoreNames.contains('transactions')) {
-        const os = db.createObjectStore('transactions', { keyPath: 'id', autoIncrement: true });
-        os.createIndex('by_wkn', 'wkn', { unique: false });
-        os.createIndex('by_ts', 'ts', { unique: false });
-        os.createIndex('by_wkn_ts', ['wkn','ts'], { unique: false });
-      }
-      if (!db.objectStoreNames.contains('quotes')) {
-        const os = db.createObjectStore('quotes', { keyPath: ['wkn','date'] });
-        os.createIndex('by_wkn', 'wkn', { unique: false });
-        os.createIndex('by_date', 'date', { unique: false });
-      }
-      if (!db.objectStoreNames.contains('fx_rates')) {
-        const os = db.createObjectStore('fx_rates', { keyPath: ['currency','date'] });
-        os.createIndex('by_currency','currency',{unique:false});
-        os.createIndex('by_date','date',{unique:false});
-      }
-
-      // roadmap store v3
-      if (!db.objectStoreNames.contains('roadmap_tasks')) {
-        const os = db.createObjectStore('roadmap_tasks', { keyPath: 'id', autoIncrement: true });
-        os.createIndex('by_checked', 'checked', { unique: false });
-        os.createIndex('by_creationDate', 'creationDate', { unique: false });
-      }
-    };
-    req.onsuccess = () => resolve(req.result);
-    req.onerror = () => reject(req.error);
-  });
-}
-
-function tx(store, mode='readonly') {
-  const t = db.transaction(store, mode);
-  return { t, store: t.objectStore(store) };
-}
-
-function put(store, value) {
-  return new Promise((res, rej) => {
-    const req = store.put(value);
-    req.onsuccess = ()=>res(req.result);
-    req.onerror = ()=>rej(req.error);
-  });
-}
-function del(store, key) {
-  return new Promise((res, rej) => {
-    const req = store.delete(key);
-    req.onsuccess = ()=>res();
-    req.onerror = ()=>rej(req.error);
-  });
-}
-function getAll(store, index=null, keyRange=null) {
-  return new Promise((res, rej) => {
-    const src = index ? store.index(index) : store;
-    const req = src.getAll(keyRange || null);
-    req.onsuccess = ()=>res(req.result || []);
-    req.onerror = ()=>rej(req.error);
-  });
-}
-
 function byId(id){ return document.getElementById(id); }
 
 // --- CRUD ---
 async function addTask(name) {
-  const { store } = tx('roadmap_tasks','readwrite');
+  const { store } = await DB.tx('roadmap_tasks','readwrite');
   const now = new Date().toISOString();
   const task = { name, creationDate: now, checked: false, finishedDate: null };
-  await put(store, task);
+  await DB.put(store, task);
   return task;
 }
 
 async function listTasks() {
-  const { store } = tx('roadmap_tasks');
-  const arr = await getAll(store);
+  const { store } = await DB.tx('roadmap_tasks');
+  const arr = await DB.getAll(store);
   // newest first by creationDate
   arr.sort((a,b)=> (a.creationDate < b.creationDate) ? 1 : -1);
   return arr;
 }
 
 async function setChecked(id, checked) {
-  const { store, t } = tx('roadmap_tasks','readwrite');
+  const { store, t } = await DB.tx('roadmap_tasks','readwrite');
   const getReq = store.get(id);
   return new Promise((resolve, reject)=>{
     getReq.onsuccess = ()=>{
@@ -109,14 +39,14 @@ async function setChecked(id, checked) {
 }
 
 async function removeTask(id) {
-  const { store } = tx('roadmap_tasks','readwrite');
-  await del(store, id);
+  const { store } = await DB.tx('roadmap_tasks','readwrite');
+  await DB.del(store, id);
 }
 
 // --- Export / Import ---
 async function exportRoadmap() {
-  const { store } = tx('roadmap_tasks');
-  const data = await getAll(store);
+  const { store } = await DB.tx('roadmap_tasks');
+  const data = await DB.getAll(store);
   // Export minimal shape without id for portability
   const portable = data.map(({name,creationDate,checked,finishedDate})=>({name,creationDate,checked,finishedDate}));
   const blob = new Blob([JSON.stringify(portable, null, 2)], { type: 'application/json' });
@@ -139,7 +69,7 @@ async function importRoadmap(file) {
     const arr = JSON.parse(text);
     items = Array.isArray(arr) ? arr : [];
   }
-  const { store } = tx('roadmap_tasks','readwrite');
+  const { store } = await await DB.tx('roadmap_tasks','readwrite');
   for (const it of items) {
     const obj = {
       name: String(it.name || '').trim(),
@@ -148,8 +78,8 @@ async function importRoadmap(file) {
       finishedDate: it.checked ? (it.finishedDate || new Date().toISOString()) : null
     };
     if (!obj.name) continue;
-    await put(store, obj);
-    //store.put(obj);
+    await DB.put(store, obj);
+    //store.DB.put(obj);
   }
   /*
   await new Promise((resolve,reject)=>{
@@ -220,7 +150,7 @@ async function refreshList() {
 
 // --- Init ---
 document.addEventListener('DOMContentLoaded', async ()=>{
-  db = await openDB();
+  db = await DB.initDB();
 
   // Add task
   const input = byId('new-task-input');
