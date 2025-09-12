@@ -20,6 +20,32 @@ __This will also be bold__
 
 _You **can** combine them_
 
+## Graphs
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
+::: mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+:::
+
+```mermaid
+architecture-beta
+    service user(mdi:account)
+    service lambda(logos:aws-lambda)
+
+    user:R --> L:lambda
+```
+
 ## Lists
 
 ### Unordered
