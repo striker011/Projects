@@ -85,3 +85,6 @@ Anforderungsdokument, Erfolgskriteriendokument, Paper, Zeitplanungsdokument und 
 ### Vergleichbare Studien
 ### Methodikablauf
 ### Simulationserstellung
+### Paper schreiben
+
+## Aufgabenabarbeitungsliste
