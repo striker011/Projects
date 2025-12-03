@@ -1,0 +1,13 @@
+{
+  "GenAI": [
+    {"title": "LLMs in Finance – ein Überblick", "file": "llm_overview.md"}
+  ],
+  "Math": [
+    {"title": "Returns – die Basis jeder Analyse", "file": "returns.md"},
+    {"title": "Covariance & Correlation", "file": "covariance.md"}
+  ],
+  "Quant": [
+    {"title": "Mein erster Backtest", "file": "backtest_intro.md"},
+    {"title": "Monte Carlo Simulation Basics", "file": "montecarlo_intro.md"}
+  ]
+}

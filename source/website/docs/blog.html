@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+
   <nav>
     <div class="logo"><strong>Your Name</strong></div>
     <div class="nav-links">
@@ -19,7 +21,6 @@
   <div class="blog-layout">
     <aside class="sidebar">
       <h3>Topics</h3>
-
       <div class="category">
         <button class="toggle">GenAI ▾</button>
         <ul class="sub-list">
@@ -29,7 +30,7 @@
       <div class="category">
         <button class="toggle">Math ▾</button>
         <ul class="sub-list">
-
+          <li>d</li>
         </ul>
       </div>
     </aside>
@@ -39,11 +40,11 @@
       <p>Select a topic on the left to view related posts.</p>
     </main>
   </div>
-
+  <button onclick="loadMarkdown('blog_pages/Intro.md')">Load Test</button>
   <footer>
     © 2025 Your Name. All rights reserved.
   </footer>
-
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="blog.js"></script>
 </body>
 </html>

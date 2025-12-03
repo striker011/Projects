@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Post</title>
+
+  <!-- Markdown parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- Mermaid -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+  <script>
+    // Mermaid vorbereiten
+    mermaid.initialize({ startOnLoad: false });
+
+    // Custom renderer: Wandelt ```mermaid-Blöcke in echte Mermaid-DIVs um
+    const renderer = {
+  code(code, infostring) {
+    return `<pre><code>TEST: ${JSON.stringify(code)}</code></pre>`;
+  }
+    };
+
+    marked.use({ renderer });
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<div class="post-container">
+  <div id="content">Loading…</div>
+</div>
+
+<script>
+  async function loadPost() {
+    const params = new URLSearchParams(window.location.search);
+    const file = params.get("file");
+
+    if (!file) {
+      document.getElementById("content").innerHTML = "<h2>Error: Kein File angegeben</h2>";
+      return;
+    }
+
+    try {
+      const response = await fetch(file);
+      const text = await response.text();
+
+      // Markdown → HTML
+      const html = marked.parse(text);
+      document.getElementById("content").innerHTML = html;
+
+      // Mermaid jetzt auf die neuen Elemente anwenden
+      mermaid.run();
+    } catch (err) {
+      document.getElementById("content").innerHTML = "<h2>Error loading file</h2>";
+      console.error(err);
+    }
+  }
+
+  loadPost();
+</script>
+
+</body>
+</html>
