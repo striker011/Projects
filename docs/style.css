@@ -221,7 +221,7 @@ blockquote {
 
 /* ================= HERO ================= */
 .frontpage-body {
-    background: #16161a;
+    background: #e8e8eb;
     color: white;
     font-family: sans-serif;
     margin: 0;
@@ -279,6 +279,7 @@ blockquote {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
+    color: #123456;
 }
 
 /* ================= PROJECT CARDS ================= */
@@ -289,11 +290,12 @@ blockquote {
 }
 
 .project-card {
-    background: #030335;
+    background: #14b13c;
     border: 1px solid #222;
     border-radius: 10px;
     padding: 1.5rem;
     transition: 0.2s;
+    color: #ececec;
 }
 
 .project-card:hover {
@@ -328,7 +330,7 @@ blockquote {
 }
 
 .blog-card {
-    background: #071615;
+    background: #24726d;
     padding: 1.2rem;
     border-radius: 10px;
     border: 1px solid #222;
@@ -344,7 +346,7 @@ blockquote {
 .about-text {
     font-size: 1.1rem;
     line-height: 1.6rem;
-    color: #cccccc;
+    color: #09011d;
 }
 
 /* ================= FOOTER ================= */
