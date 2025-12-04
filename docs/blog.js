@@ -1,64 +1,71 @@
-// Toggle dropdown lists on click
-document.querySelectorAll(".toggle").forEach(button => {
-    button.addEventListener("click", () => {
-      const list = button.nextElementSibling;
-      const isOpen = list.style.display === "block";
-      list.style.display = isOpen ? "none" : "block";
-      button.textContent = button.textContent.replace(isOpen ? '▴' : '▾', isOpen ? '▾' : '▴');
-    });
-  
-    // Start closed
-    button.nextElementSibling.style.display = "none";
-  });
+// Load topics.json and build sidebar
+async function loadSidebar() {
+  const sidebar = document.getElementById("sidebar-menu");
+  sidebar.innerHTML = "<div>Loading…</div>";
 
-async function loadMarkdown(file) {
-  const response = await fetch(file);
-  const text = await response.text();
-  const html = marked.parse(text);
-  document.querySelector(".blog-main").innerHTML = html;
+  try {
+    const res = await fetch("topics.json");
+    const topics = await res.json();
+
+    sidebar.innerHTML = ""; // clear loader
+
+    // Loop categories
+    for (const category in topics) {
+      // category title
+      const catDiv = document.createElement("div");
+      catDiv.className = "sidebar-category";
+      catDiv.textContent = category;
+      sidebar.appendChild(catDiv);
+
+      // posts of this category
+      topics[category].forEach(post => {
+        const link = document.createElement("a");
+        link.className = "sidebar-post";
+        link.textContent = post.title;
+
+        // load post when clicked
+        link.onclick = () => loadPost(post, category);
+
+        sidebar.appendChild(link);
+      });
+    }
+  } catch (err) {
+    sidebar.innerHTML = "<div>Error loading topics</div>";
+  }
 }
 
-async function buildSidebar() {
-  const response = await fetch("topics.json");
-  const topics = await response.json();
+async function loadPost(post, category) {
+  // Show header section
+  document.getElementById("article-header").classList.remove("hidden");
 
-  const sidebar = document.querySelector(".sidebar");
+  // Title
+  document.getElementById("article-title").textContent = post.title;
 
-  for (const [catName, posts] of Object.entries(topics)) {
-    const catDiv = document.createElement("div");
-    catDiv.classList.add("category");
+  // Category
+  document.getElementById("article-category").textContent = category;
 
-    const btn = document.createElement("button");
-    btn.classList.add("toggle");
-    btn.textContent = `${catName} ▾`;
+  // Updated
+  document.getElementById("article-updated").textContent = post.updated || "Unknown";
 
-    const ul = document.createElement("ul");
-    ul.classList.add("sub-list");
-    ul.style.display = "none";
+  // GitHub link (for step C)
+  document.getElementById("article-github").href =
+    "https://github.com/striker011/Projects/blob/main/" + post.github;
 
-    btn.addEventListener("click", () => {
-      const isOpen = ul.style.display === "block";
-      ul.style.display = isOpen ? "none" : "block";
-      btn.textContent = btn.textContent.replace(isOpen ? '▴' : '▾', isOpen ? '▾' : '▴');
-    });
+  // Load Markdown file
+  const res = await fetch(post.file);
+  const text = await res.text();
 
-    posts.forEach(p => {
-      const li = document.createElement("li");
-      li.innerHTML = `<a class="post-link" data-file="${p.file}">${p.title}</a>`;
-      ul.appendChild(li);
-    });
+  // Render Markdown
+  document.getElementById("article-content").innerHTML = marked.parse(text);
 
-    catDiv.appendChild(btn);
-    catDiv.appendChild(ul);
-    sidebar.appendChild(catDiv);
+  // Run Mermaid
+  if (text.includes("```mermaid")) {
+    mermaid.run();
   }
 
-  // click handler für dynamic posts
-  setTimeout(() => {
-    document.querySelectorAll(".post-link").forEach(link => {
-      link.addEventListener("click", () => {
-        loadMarkdown(`posts/${link.getAttribute("data-file")}`);
-      });
-    });
-  }, 100);
+  // Scroll to top of article
+  document.querySelector(".content").scrollTo(0, 0);
 }
+
+
+loadSidebar();

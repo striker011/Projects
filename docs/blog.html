@@ -2,49 +2,52 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog | Your Name</title>
+  <title>Blog</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 </head>
+
 <body>
 
+<div class="layout">
 
-  <nav>
-    <div class="logo"><strong>Your Name</strong></div>
-    <div class="nav-links">
-      <a href="frontpage.html">Home</a>
-      <a href="projects.html">Projekte</a>
-      <a href="blog.html">Blog</a>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-title">📘 My Blog</div>
+    <nav id="sidebar-menu">
+      <!-- Wird später in Schritt E dynamisch aus topics.json erzeugt -->
+      <div class="sidebar-loading">Loading topics…</div>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- ARTICLE HEADER -->
+    <div id="article-header" class="article-header hidden">
+      <h1 id="article-title">Blog Title</h1>
+
+      <div class="article-meta">
+        <span id="article-category">Category</span>
+        ·
+        <span id="article-updated">Updated: --</span>
+        ·
+        <a id="article-github" href="#" target="_blank">View on GitHub ↗</a>
+      </div>
+
+      <hr />
     </div>
-  </nav>
 
-  <div class="blog-layout">
-    <aside class="sidebar">
-      <h3>Topics</h3>
-      <div class="category">
-        <button class="toggle">GenAI ▾</button>
-        <ul class="sub-list">
-        </ul>
-      </div>
+    <!-- ARTICLE CONTENT -->
+    <article id="article-content" class="article-body">
+      <p>Select a topic from the sidebar</p>
+    </article>
 
-      <div class="category">
-        <button class="toggle">Math ▾</button>
-        <ul class="sub-list">
-          <li>d</li>
-        </ul>
-      </div>
-    </aside>
+  </main>
 
-    <main class="blog-main">
-      <h1>Welcome to the Blog</h1>
-      <p>Select a topic on the left to view related posts.</p>
-    </main>
-  </div>
-  <button onclick="loadMarkdown('blog_pages/Intro.md')">Load Test</button>
-  <footer>
-    © 2025 Your Name. All rights reserved.
-  </footer>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="blog.js"></script>
+</div>
+
+<script src="blog.js"></script>
 </body>
 </html>

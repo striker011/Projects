@@ -1,13 +1,32 @@
 {
-  "GenAI": [
-    {"title": "LLMs in Finance – ein Überblick", "file": "llm_overview.md"}
+  "Quant": [
+    {
+      "title": "Returns & Variance",
+      "file": "posts/quant/returns.md",
+      "github": "source/website/posts/quant/returns.md",
+      "updated": "2025-01-12"
+    },
+    {
+      "title": "Backtesting Basics",
+      "file": "posts/quant/backtesting_intro.md",
+      "github": "source/website/posts/quant/backtesting_intro.md",
+      "updated": "2025-01-08"
+    }
   ],
   "Math": [
-    {"title": "Returns – die Basis jeder Analyse", "file": "returns.md"},
-    {"title": "Covariance & Correlation", "file": "covariance.md"}
+    {
+      "title": "Linear Algebra Intro",
+      "file": "posts/math/linear_algebra.md",
+      "github": "source/website/posts/math/linear_algebra.md",
+      "updated": "2025-01-10"
+    }
   ],
-  "Quant": [
-    {"title": "Mein erster Backtest", "file": "backtest_intro.md"},
-    {"title": "Monte Carlo Simulation Basics", "file": "montecarlo_intro.md"}
+  "GenAI": [
+    {
+      "title": "LLM Basics",
+      "file": "posts/genai/llm_basics.md",
+      "github": "source/website/posts/genai/llm_basics.md",
+      "updated": "2025-01-05"
+    }
   ]
 }
