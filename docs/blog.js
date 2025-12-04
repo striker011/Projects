@@ -47,6 +47,12 @@ async function loadPost(post, category) {
   // Updated
   document.getElementById("article-updated").textContent = post.updated || "Unknown";
 
+  if(post.github){
+    document.getElementById("article-github").href = "https://github.com/striker011/Projects/blob/main/"+post.github;
+    document.getElementById("article-github").style.display ="inline";
+  }else{
+    document.getElementById("article-github").style.display ="none";
+  }
   // GitHub link (for step C)
   document.getElementById("article-github").href =
     "https://github.com/striker011/Projects/blob/main/" + post.github;
