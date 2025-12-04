@@ -96,14 +96,15 @@ async function loadPost(post, category) {
   document.getElementById("article-updated").textContent = post.updated || "Unknown";
 
   if(post.github){
-    document.getElementById("article-github").href = "https://github.com/striker011/Projects/blob/main/"+post.github;
+    document.getElementById("article-github").href = `https://github.com/striker011/Projects/blob/main/${post.github}`;
     document.getElementById("article-github").style.display ="inline";
   }else{
     document.getElementById("article-github").style.display ="none";
   }
   // GitHub link (for step C)
-  document.getElementById("article-github").href =
+  /*document.getElementById("article-github").href =
     "https://github.com/striker011/Projects/blob/main/" + post.github;
+    */
 
   // Load Markdown file
   const res = await fetch(post.file);
@@ -122,5 +123,5 @@ async function loadPost(post, category) {
 }
 
 
-loadSidebar();
-//loadSidebarLocal(); //local testing variable
+//loadSidebar();
+loadSidebarLocal(); //local testing variable
