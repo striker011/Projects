@@ -23,6 +23,7 @@ body {
   border-right: 1px solid rgba(255,255,255,0.08);
   padding: 1rem;
   overflow-y: auto;
+  flex-shrink: 0;
 }
 
 .sidebar-title {
@@ -50,8 +51,11 @@ body {
 
 .content {
   flex-grow: 1;
-  padding: 2rem 3rem;
+  padding-left: 3rem;
   overflow-y: auto;
+  margin-left:0;
+  padding-left: 2.5rem;
+  flex-grow: 1;
 }
 
 .article-header {
