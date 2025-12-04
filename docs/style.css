@@ -218,3 +218,148 @@ blockquote {
 .project-actions button:hover {
   background: #f16090;
 }
+
+/* ================= HERO ================= */
+.frontpage-body {
+    background: #16161a;
+    color: white;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.hero {
+    text-align: center;
+    padding: 6rem 1rem 4rem;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: #bbbbbb;
+    margin-top: 0.5rem;
+}
+
+.hero-buttons {
+    margin-top: 2rem;
+}
+
+.btn {
+    background: #461c1c;
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border-radius: 6px;
+    margin: 0 0.5rem;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: #271a1a;
+}
+
+/* ================= SECTIONS ================= */
+.section {
+    margin: 4rem auto;
+    padding: 0 2rem;
+    max-width: 1000px;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* ================= TECH GRID ================= */
+.tech-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+/* ================= PROJECT CARDS ================= */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.project-card {
+    background: #030335;
+    border: 1px solid #222;
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: 0.2s;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    border-color: #444;
+}
+
+.project-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-small {
+    background: #111a0a;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.btn-small:hover {
+    background: #09110e;
+}
+
+/* ================= BLOG PREVIEW ================= */
+.blog-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.blog-card {
+    background: #071615;
+    padding: 1.2rem;
+    border-radius: 10px;
+    border: 1px solid #222;
+    transition: 0.2s;
+}
+
+.blog-card:hover {
+    transform: translateY(-4px);
+    border-color: #444;
+}
+
+/* ================= ABOUT ME ================= */
+.about-text {
+    font-size: 1.1rem;
+    line-height: 1.6rem;
+    color: #cccccc;
+}
+
+/* ================= FOOTER ================= */
+.footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+    color: #999;
+    border-top: 1px solid #222;
+}
+
+.footer a {
+    color: #aaa;
+    text-decoration: none;
+}
+.footer a:hover {
+    color: white;
+}

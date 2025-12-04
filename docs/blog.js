@@ -123,5 +123,5 @@ async function loadPost(post, category) {
 }
 
 
-//loadSidebar();
-loadSidebarLocal(); //local testing variable
+loadSidebar();
+//loadSidebarLocal(); //local testing variable
