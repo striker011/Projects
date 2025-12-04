@@ -166,3 +166,55 @@ blockquote {
   background: #1c1c20;
   color: #ffffff;
 }
+
+/*------------PROJECT_--------------------*/
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.project-card {
+  background: #4c8f73;
+  border: 1px solid #2a2a2d;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: 0.2s ease;
+}
+
+.project-card:hover {
+  border-color: #e00303;
+  transform: translateY(-3px);
+}
+
+.badge {
+  display: inline-block;
+  background: #ffffff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-right: 6px;
+  margin-top: 6px;
+  font-size: 0.75rem;
+}
+
+.project-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.project-actions a,
+.project-actions button {
+  color: white;
+  text-decoration: none;
+  background: #2e2e33;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.project-actions a:hover,
+.project-actions button:hover {
+  background: #f16090;
+}

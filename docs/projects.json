@@ -1,0 +1,31 @@
+{
+  "projects": [
+    {
+      "id": "kafka_simulation",
+      "title": "Kafka Simulation & Benchmarking",
+      "description": "Experimentelle Simulation und Evaluierung von Kafka-Konfigurationen basierend auf meiner Bachelorarbeit.",
+      "file": "projects/kafka_simulation.md",
+      "github": "https://github.com/striker011/Projects/tree/main/source/website/projects/kafka_simulation",
+      "tech": ["C#", "Kafka", "Distributed Systems", "Simulation"],
+      "updated": "2025-01-12"
+    },
+    {
+      "id": "financemanager",
+      "title": "Finance Manager App",
+      "description": "Mobile App in .NET MAUI mit SQLite, Budgetverwaltung, Transaktionen, Kategorien und automatischen Statistiken.",
+      "file": "projects/finance_manager.md",
+      "github": "https://github.com/striker011/Projects/tree/main/source/website/projects/finance_manager",
+      "tech": [".NET MAUI", "C#", "SQLite", "MVVM"],
+      "updated": "2024-12-20"
+    },
+    {
+      "id": "assetcreator",
+      "title": "AssetCreator Tool",
+      "description": "C# Tool zur XML-Generierung dynamischer Objekte und Templates mit Reflection / Editor Oberfläche.",
+      "file": "projects/asset_creator.md",
+      "github": "https://github.com/striker011/Projects/tree/main/source/website/projects/asset_creator",
+      "tech": ["C#", "Reflection", "XML", "UI Toolkit"],
+      "updated": "2024-11-10"
+    }
+  ]
+}

@@ -6,41 +6,25 @@
   <title>Blog | Your Name</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <nav>
-    <div class="logo"><strong>Your Name</strong></div>
-    <div class="nav-links">
-      <a href="frontpage.html">Home</a>
-      <a href="projects.html">Projekte</a>
-      <a href="blog.html">Blog</a>
-    </div>
-  </nav>
 
-  <div class="blog-layout">
-    <aside class="sidebar">
-      <h3>Topics</h3>
-
-      <div class="category">
-        <button class="toggle">Projekte ▾</button>
-        <ul class="sub-list">
-            <li>
-                <a href="project_pages/dashboard.md">Dashboard</a>
-            </li>
-        </ul>
+  <div id="project-container" class="project-grid"></div>
+  <div class="content">
+      <div class="article-header">
+          <h1 id="project-title"></h1>
+          <div class="article-meta">
+              <span id="project-updated"></span>
+              · <a id="project-github" target="_blank">GitHub ↗</a>
+          </div>
       </div>
 
-    </aside>
-
-    <main class="blog-main">
-      <h1>Welcome to the Blog</h1>
-      <p>Select a topic on the left to view related posts.</p>
-    </main>
+      <div id="project-content"></div>
   </div>
+
 
   <footer>
     © 2025 Your Name. All rights reserved.
   </footer>
-
-  <script src="blog.js"></script>
+  <script src="projects.js"></script>
+  <script src="project_viewer.js"></script>
 </body>
 </html>
