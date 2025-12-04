@@ -18,18 +18,21 @@ body {
 /* SIDEBAR -------------------------------------------------------- */
 
 .sidebar {
-  width: 240px;
-  background: #3f3f6d;
-  border-right: 1px solid rgba(255,255,255,0.08);
-  padding: 1rem;
-  overflow-y: auto;
-  flex-shrink: 0;
+    width: 260px;                /* etwas breiter = hübscher + klarer */
+    flex-shrink: 0;              /* WICHTIG: verhindert das Zusammenschrumpfen */
+    background: #4b4b85;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    padding: 1rem;
+    overflow-y: auto;
+    position: relative;
+    z-index: 10;                 /* Sidebar liegt ÜBER dem Content */
 }
 
 .sidebar-title {
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 1rem;
+  color: #f5eaea;
 }
 
 #sidebar-menu div,
@@ -50,12 +53,16 @@ body {
 /* MAIN CONTENT --------------------------------------------------- */
 
 .content {
-  flex-grow: 1;
-  padding-left: 3rem;
-  overflow-y: auto;
-  margin-left:0;
-  padding-left: 2.5rem;
-  flex-grow: 1;
+    flex-grow: 1;
+    margin-left: 0;               /* Verhindert Verschiebung */
+    padding-left: 4rem !important;/* 4rem Abstand = viel sicherer */
+    padding-right: 3rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    overflow-y: auto;
+    position: relative;
+    z-index: 1;
+    max-width: calc(100% - 260px); /* Sidebar wird garantiert nicht überlappt */
 }
 
 .article-header {

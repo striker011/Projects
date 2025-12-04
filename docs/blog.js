@@ -1,3 +1,31 @@
+//lokal testing setting
+
+const TOPICS = {
+  "Quant": [
+    {
+      title: "Returns & Variance",
+      file: "posts/quant/returns.md",
+      github: "source/website/posts/quant/returns.md",
+      updated: "2025-01-12"
+    },
+    {
+      title: "Backtesting Basics",
+      file: "posts/quant/backtesting_intro.md",
+      github: "source/website/posts/quant/backtesting_intro.md",
+      updated: "2025-01-08"
+    }
+  ],
+  "Math": [
+    {
+      title: "Linear Algebra Intro",
+      file: "posts/math/linear_algebra.md",
+      github: "source/website/posts/math/linear_algebra.md",
+      updated: "2025-01-10"
+    }
+  ]
+};
+
+
 // Load topics.json and build sidebar
 async function loadSidebar() {
   const sidebar = document.getElementById("sidebar-menu");
@@ -31,6 +59,26 @@ async function loadSidebar() {
     }
   } catch (err) {
     sidebar.innerHTML = "<div>Error loading topics</div>";
+  }
+}
+
+function loadSidebarLocal() {
+  const sidebar = document.getElementById("sidebar-menu");
+  sidebar.innerHTML = "";
+
+  for (const category in TOPICS) {
+    const cat = document.createElement("div");
+    cat.className = "sidebar-category";
+    cat.textContent = category;
+    sidebar.appendChild(cat);
+
+    TOPICS[category].forEach(post => {
+      const link = document.createElement("a");
+      link.className = "sidebar-post";
+      link.textContent = post.title;
+      link.onclick = () => loadPost(post, category);
+      sidebar.appendChild(link);
+    });
   }
 }
 
@@ -75,3 +123,4 @@ async function loadPost(post, category) {
 
 
 loadSidebar();
+//loadSidebarLocal(); //local testing variable
