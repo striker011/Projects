@@ -1,6 +1,43 @@
 {
   "projects": [
     {
+      "id":"network routing engineering project for google",
+      "test":"https://www.google.com/about/careers/applications/jobs/results/105916160410559174-network-engineer-edge-network-operations"
+
+    },
+    {
+    "id": "High-Performance Systems",
+    "keywords": ["C++", "C", "multithreading", "key-value store", "allocator", "flamegraphs", "time complexity"]
+
+    },
+    {
+      "id": "Quant Trading Stack",
+      "keywords": ["order book matcher", "backtester", "portfolio optimizer", "signal math", "probability", "optimization"],
+      "tech": ["test"]
+    },
+    {
+      "id": "Data & Pipelines",
+      "keywords": ["market data scraper", "analysis pipeline", "scalable code"]
+
+    },
+    {
+      "id":"Quant Dev, System Programming Project zur Darstellung, c/c++  highspeed keyvalue, multithreaded client server, task runner, monte carlo sim, mem allocator",
+      "more":"backtesting engines, optimizing pipelines, implementation of signal math model,linear algebra, probebility statistics, optimization",
+      "test":"scalable code",
+      "good":"real work,personal project,internship,opensource work",
+      "maps":"hashmaps,graphs,trees,time complex,",
+      "tst":"system oriented thinking",
+      "speed":"flamegraphs,cpu cycles, time complex",
+      "project":"tradeing sim,order book matcher, portfolio optimizer,analysis pipelin,backtester,trade exc sim,market data scraper"
+
+    },
+    { 
+      "id": "Webseite modernisieren",
+      "stack": ["Angular", "TypeScript"],
+      "goal": "Portfolio / Dev-Blog" 
+
+    },
+    {
       "id": "kafka_simulation",
       "title": "Kafka Simulation & Benchmarking",
       "description": "Experimentelle Simulation und Evaluierung von Kafka-Konfigurationen basierend auf meiner Bachelorarbeit.",

@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 
+ <div id="nav-placeholder"></div>
+
+
   <div id="project-container" class="project-grid"></div>
   <div class="content">
       <div class="article-header">
@@ -24,7 +27,11 @@
   <footer>
     © 2025 Your Name. All rights reserved.
   </footer>
-  <script src="projects.js"></script>
-  <script src="project_viewer.js"></script>
+  <script type="module">
+  console.log("module inline works", location.href);
+</script>
+  <script type="module" src="projects.js"></script>
+    <script src="navigationLoader.js"></script>
+<!--   <script src="project_viewer.js"></script>-->
 </body>
 </html>

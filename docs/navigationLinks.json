@@ -1,0 +1,14 @@
+[
+  {
+    "label": "Home",
+    "page": "frontpage"
+  },
+  {
+    "label": "Blog",
+    "page": "blog"
+  },
+  {
+    "label": "Projects",
+    "page" : "projects"
+  }
+]

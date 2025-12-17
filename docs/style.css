@@ -198,6 +198,10 @@ blockquote {
   font-size: 0.75rem;
 }
 
+.project-tech {
+  color:#000000;
+}
+
 .project-actions {
   margin-top: 1rem;
   display: flex;

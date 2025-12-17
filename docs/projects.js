@@ -1,3 +1,5 @@
+console.log("projects.js loaded as module");
+
 // --------------------------
 // HARD-CODED PROJECT DATA
 // --------------------------
@@ -64,11 +66,6 @@ function loadProjectsLocal() {
   });
 }
 
-function openProject(id) {
-  window.location.href = `project_post.html?id=${id}`;
-}
-
-
 
 async function loadProjects() {
   const container = document.getElementById("project-container");
@@ -78,8 +75,14 @@ async function loadProjects() {
   container.innerHTML = "";
 
   data.projects.forEach(proj => {
+    
+    if(!Array.isArray(proj.tech)){
+      return;
+    }
+
     const card = document.createElement("div");
     card.className = "project-card";
+    
 
     card.innerHTML = `
       <h2>${proj.title}</h2>
@@ -104,5 +107,10 @@ function openProject(id) {
 }
 
 loadProjects();
+
+const res = await fetch("./projects.json"); // oder dein Pfad
+console.log("status", res.status, res.url);
+const data = await res.json();
+console.log("data", data);
 // START
 //loadProjectsLocal();
