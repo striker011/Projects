@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>Blog</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/blog.css" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 </head>
@@ -13,22 +14,22 @@
 <div class="layout">
 
   <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sidebar-title">📘 My Blog</div>
+  <aside class="blog-sidebar">
+    <div class="blog-sidebar-title">📘 My Blog</div>
     <nav id="sidebar-menu">
       <!-- Wird später in Schritt E dynamisch aus topics.json erzeugt -->
-      <div class="sidebar-loading">Loading topics…</div>
+      <div class="blog-sidebar-loading">Loading topics…</div>
     </nav>
   </aside>
 
   <!-- MAIN CONTENT -->
-  <main class="content">
+  <main class="blog-content">
 
     <!-- ARTICLE HEADER -->
-    <div id="article-header" class="article-header hidden">
+    <div id="article-header" class="blog-article-header hidden">
       <h1 id="article-title">Blog Title</h1>
 
-      <div class="article-meta">
+      <div class="blog-article-meta">
         <span id="article-category">Category</span>
         ·
         <span id="article-updated">Updated: --</span>
@@ -40,7 +41,7 @@
     </div>
 
     <!-- ARTICLE CONTENT -->
-    <article id="article-content" class="article-body">
+    <article id="article-content" class="blog-article-body">
       <p>Select a topic from the sidebar</p>
     </article>
 
@@ -50,7 +51,7 @@
 
 
 
-<script src="blog.js"></script>
-  <script src="navigationLoader.js"></script>
+<script src="../js/blog.js"></script>
+  <script src="../js/navigationLoader.js"></script>
 </body>
 </html>

@@ -57,7 +57,7 @@ function loadProjectsLocal() {
       </div>
 
       <div class="project-actions">
-        <button onclick="openProject('${proj.id}')">Read More</button>
+        <button type="button"  class="project-btn-small" onclick="openProject('${proj.id}')">Read More</button>
         <a href="${proj.github}" target="_blank">GitHub ↗</a>
       </div>
     `;
@@ -69,7 +69,7 @@ function loadProjectsLocal() {
 
 async function loadProjects() {
   const container = document.getElementById("project-container");
-  const response = await fetch("projects.json");
+  const response = await fetch("../data/projects.json");
   const data = await response.json();
 
   container.innerHTML = "";
@@ -93,7 +93,7 @@ async function loadProjects() {
       </div>
 
       <div class="project-actions">
-        <button onclick="openProject('${proj.id}')">Read More</button>
+        <button type="button" class="project-btn-small" onclick="openProject('${proj.id}')">Read More</button>
         <a href="${proj.github}" target="_blank">GitHub ↗</a>
       </div>
     `;
@@ -108,9 +108,3 @@ function openProject(id) {
 
 loadProjects();
 
-const res = await fetch("./projects.json"); // oder dein Pfad
-console.log("status", res.status, res.url);
-const data = await res.json();
-console.log("data", data);
-// START
-//loadProjectsLocal();

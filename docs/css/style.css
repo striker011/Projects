@@ -1,0 +1,87 @@
+/* RESET GitHub Pages global styles */
+h1, h2, h3, h4, h5, h6 {
+  all: unset;
+  display: block;
+  font-weight: 600;
+  margin: 1rem 0;
+  color: #000000;
+  font-family: inherit;
+}
+
+/* custom sizes */
+h1 { font-size: 1.8rem; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.2rem; }
+
+/* GLOBAL LAYOUT -------------------------------------------------- */
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #e9e9f3;
+  color: #000000;
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+/* SCROLLBAR ------------------------------------------------------ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #2e2e32;
+  border-radius: 4px;
+}
+
+
+.sidebar-category {
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.sidebar-post {
+  margin-left: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  color: #c8c8c8;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: block;
+  border-radius: 4px;
+}
+
+.sidebar-post:hover {
+  background: #1c1c20;
+  color: #ffffff;
+}
+
+
+/* ================= ABOUT ME ================= */
+.about-text {
+    font-size: 1.1rem;
+    line-height: 1.6rem;
+    color: #09011d;
+}
+
+/* ================= FOOTER ================= */
+.footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+    color: #999;
+    border-top: 1px solid #222;
+}
+
+.footer a {
+    color: #aaa;
+    text-decoration: none;
+}
+.footer a:hover {
+    color: white;
+}

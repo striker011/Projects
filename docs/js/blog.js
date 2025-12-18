@@ -4,13 +4,13 @@ const TOPICS = {
   "Quant": [
     {
       title: "Returns & Variance",
-      file: "posts/quant/returns.md",
+      file: "../../posts/quant/returns.md",
       github: "source/website/posts/quant/returns.md",
       updated: "2025-01-12"
     },
     {
       title: "Backtesting Basics",
-      file: "posts/quant/backtesting_intro.md",
+      file: "../../posts/quant/backtesting_intro.md",
       github: "source/website/posts/quant/backtesting_intro.md",
       updated: "2025-01-08"
     }
@@ -32,7 +32,7 @@ async function loadSidebar() {
   sidebar.innerHTML = "<div>Loading…</div>";
 
   try {
-    const res = await fetch("topics.json");
+    const res = await fetch("../data/topics.json");
     const topics = await res.json();
 
     sidebar.innerHTML = ""; // clear loader
@@ -41,14 +41,14 @@ async function loadSidebar() {
     for (const category in topics) {
       // category title
       const catDiv = document.createElement("div");
-      catDiv.className = "sidebar-category";
+      catDiv.className = "blog-sidebar-category";
       catDiv.textContent = category;
       sidebar.appendChild(catDiv);
 
       // posts of this category
       topics[category].forEach(post => {
         const link = document.createElement("a");
-        link.className = "sidebar-post";
+        link.className = "blog-sidebar-post";
         link.textContent = post.title;
 
         // load post when clicked
@@ -68,13 +68,13 @@ function loadSidebarLocal() {
 
   for (const category in TOPICS) {
     const cat = document.createElement("div");
-    cat.className = "sidebar-category";
+    cat.className = "blog-sidebar-category";
     cat.textContent = category;
     sidebar.appendChild(cat);
 
     TOPICS[category].forEach(post => {
       const link = document.createElement("a");
-      link.className = "sidebar-post";
+      link.className = "blog-sidebar-post";
       link.textContent = post.title;
       link.onclick = () => loadPost(post, category);
       sidebar.appendChild(link);

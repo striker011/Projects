@@ -1,7 +1,7 @@
 const navPlaceholder = document.getElementById("nav-placeholder");
 
 // Load nav.html first
-fetch("navigation.html")
+fetch("../html/navigation.html")
   .then(res => res.text())
   .then(html => {
     navPlaceholder.innerHTML = html;
@@ -20,7 +20,7 @@ fetch("navigation.html")
 function initNavigation() {
   const navList = document.querySelector(".nav-list");
 
-  fetch("navigationLinks.json")
+  fetch("../data/navigationLinks.json")
     .then(res => res.json())
     .then(links => {
       buildNavigation(navList, links);
