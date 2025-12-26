@@ -1,39 +1,4 @@
-console.log("projects.js loaded as module");
 
-// --------------------------
-// HARD-CODED PROJECT DATA
-// --------------------------
-const PROJECTS = {
-  "projects": [
-    {
-      "id": "kafka_simulation",
-      "title": "Kafka Simulation & Benchmarking",
-      "description": "Simulation und Evaluierung von Kafka-Konfigurationen basierend auf meiner Bachelorarbeit.",
-      "file": "projects/kafka_simulation.md",
-      "github": "https://github.com/striker011/Projects/tree/main/source/website/projects/kafka_simulation",
-      "tech": ["C#", "Kafka", "Distributed Systems", "Simulation"],
-      "updated": "2025-01-12"
-    },
-    {
-      "id": "financemanager",
-      "title": "Finance Manager App",
-      "description": ".NET MAUI App mit SQLite zum Tracken von Budget, Income, Expenses und Kategorien.",
-      "file": "projects/finance_manager.md",
-      "github": "https://github.com/striker011/Projects/tree/main/source/website/projects/finance_manager",
-      "tech": [".NET MAUI", "C#", "SQLite", "MVVM"],
-      "updated": "2024-12-20"
-    },
-    {
-      "id": "assetcreator",
-      "title": "AssetCreator Tool",
-      "description": "C# Tool zur dynamischen XML-Asset-Generierung mit Reflection und UI.",
-      "file": "projects/asset_creator.md",
-      "github": "https://github.com/striker011/Projects/tree/main/source/website/projects/asset_creator",
-      "tech": ["C#", "Reflection", "XML", "UI Toolkit"],
-      "updated": "2024-11-10"
-    }
-  ]
-};
 
 // --------------------------
 // LOAD PROJECT CARDS

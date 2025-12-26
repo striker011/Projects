@@ -1,29 +1,5 @@
 //lokal testing setting
 
-const TOPICS = {
-  "Quant": [
-    {
-      title: "Returns & Variance",
-      file: "../../posts/quant/returns.md",
-      github: "source/website/posts/quant/returns.md",
-      updated: "2025-01-12"
-    },
-    {
-      title: "Backtesting Basics",
-      file: "../../posts/quant/backtesting_intro.md",
-      github: "source/website/posts/quant/backtesting_intro.md",
-      updated: "2025-01-08"
-    }
-  ],
-  "Math": [
-    {
-      title: "Linear Algebra Intro",
-      file: "posts/math/linear_algebra.md",
-      github: "source/website/posts/math/linear_algebra.md",
-      updated: "2025-01-10"
-    }
-  ]
-};
 
 
 // Load topics.json and build sidebar
@@ -116,6 +92,7 @@ async function loadPost(post, category) {
   // Run Mermaid
   if (text.includes("```mermaid")) {
     mermaid.run();
+    await mermaid.run({ querySelector: "#article-content .mermaid" });
   }
 
   // Scroll to top of article

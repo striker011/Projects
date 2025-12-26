@@ -1,0 +1,146 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+
+
+
+bool checkConstraints(string str1,string str2){
+    
+    if(str1.length()<2 || str1.length()>(2*10^5)){
+        std::cout<<"Check1 failed\n";
+        return false;
+    }
+    if(str2.empty()|| str2.length()>(2*10^5)){
+        std::cout<<"Check2 failed\n";
+        return false;
+    }
+    if( !( (str2.length()+1) == str1.length() ) ){ //Fehler, hatte zuerst str1.length()+1, das ist aber bereits der längere Str
+        std::cout<<"Check3 failed\n";
+        return false;
+    }
+    
+    return true;
+}
+
+/*
+gleiche chars werden in array2 mit 0 ersetzt
+fidnen welcher char doppelt ist
+dann nach erstem anderem 0 die position nehmen, -1, nehme den char der an der position ist ovn array1
+dann such ich in array1 jeweils +1,-1. wenn ich einen hit habe, erhoehe ich den wert um 1 und suche erneut
+wenn ich keine weiteren hits habe
+position nehmen, dann min = pos + negativeLinksRichtungMaxPosi, max = pos + positiveRechtsRichtungMaxPosi
+dann for i=min bis <= max vector mit i auffuellen, return
+
+wenn ich keinen char finde der keine 0 ist in array2 return ich -1 im vector
+*/
+
+
+vector<int> getRemovableIndices(string str1, string str2) {
+    char replaceChar = '5';
+    char doppelterChar='j'; //Fehler -1 sind zwei Zeichen, nicht eins
+    vector<int> rtn;
+    if(!checkConstraints(str1,str2)){
+        rtn.push_back(-1);
+        std::cout<<"ConstraintCheck failed\n";
+        return rtn;
+    }
+    const int len1= str1.length() +1; // +1 wegen 0 oder /0
+    const int len2 = str2.length() ; // +1 wegen 0 oder /0 ||<---Fehler, das erzeugt komisches Verhalten, besser extra array1 erzeugen
+    int len3=len2+1;
+    char array1[len1],array2[len3],array3[len2],array1C[len1]; //+1 wieder um die laenge von str1 zu bekommen
+    
+    //auffuellen
+    strcpy(array1, str1.c_str());
+    strcpy(array3, str2.c_str());
+    strcpy(array1C, array1);
+    
+    //array2[len2] = replaceChar ||Fehler, da array2 ja kürzer ist als array1, wird am Ende immer der extra Byte übersein
+    
+    for(int i=0;i<len3;i++){
+        array2[i]=replaceChar;
+    }
+    
+    for(int i=0;i<len2;i++){
+        array2[i]=array3[i];
+    }
+    
+    
+
+    //Fehler!, hatte array1[i] ==array2[i] gefolgt von array2[i] J= replaceChar, hätte extra array1 (array1C benutzen müssen)
+    //doppelte ersetzen
+    for(int i =0;i<len2;i++){
+        if(array1C[i]==array2[i]){
+            array1C[i]=replaceChar;
+        }
+    }
+    
+    int replPosition = 0;
+    for(int i =0;i<len1;i++){
+        if(array1C[i] != replaceChar){//array1C sonst alles richtig
+            replPosition = i;
+            break;
+        }
+    }
+    
+    //richtig
+    if(replPosition == 0){
+        rtn.push_back(-1);
+        std::cout<<"replPosition=0 | Failed to find duplicate\n";
+        return rtn;
+    }
+    
+    //der Teil war 100% richtig
+    doppelterChar = array1[replPosition];
+    int replPosition2 = replPosition;
+    bool hit = false;
+    int i=replPosition;
+    while(hit == false){
+        if( !(array1[i] == doppelterChar) ){
+            break;
+        }
+        i--;
+    }
+    
+    int min = i+1,max = replPosition2;//i+1 fehler
+    
+    //richtig
+    for(int i = min; i<=max;i++){
+        rtn.push_back(i);
+    }
+    
+    return rtn;
+}
+
+int main()
+{
+    string str1 = "aabbb";
+
+    string str2 = "aabb";
+
+
+    vector<int> result = getRemovableIndices(str1, str2);
+
+    for (size_t i = 0; i < result.size(); i++) {
+        cout << result[i];
+
+        if (i != result.size() - 1) {
+            cout << "\n";
+        }
+    }
+
+    cout << "\n";
+
+    return 0;
+}
+
+
+/*input 
+aabbb
+aabb*/
+
+/*expected output
+2
+3
+4*/

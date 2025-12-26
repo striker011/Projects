@@ -53,6 +53,7 @@
 
       // Mermaid jetzt auf die neuen Elemente anwenden
       mermaid.run();
+      await mermaid.run({ querySelector: "#content .mermaid" });
     } catch (err) {
       document.getElementById("content").innerHTML = "<h2>Error loading file</h2>";
       console.error(err);
