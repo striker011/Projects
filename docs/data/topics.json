@@ -31,15 +31,17 @@
   ],
   "Misc" : [
     {
-      "title" : "Kafka",
-      "file"  : "../project_pages/kafka_simulation.md",
-      "github": "source/website/project/kafka.md",
-      "updated":"2025-01-05"
-    },
-    {
       "title":"md commands",
       "file":"../project_pages/markdown_commands.md",
       "github":"source/website/posts/genai/llm_basics.md",
+      "updated":"2025-01-05"
+    }
+  ],
+  "Projects":[
+        {
+      "title" : "Kafka",
+      "file"  : "../project_pages/kafka_simulation.md",
+      "github": "source/website/project/kafka.md",
       "updated":"2025-01-05"
     }
   ]

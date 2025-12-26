@@ -1,3 +1,5 @@
+var jsonData = [];
+
 function transformMermaidBlocks(text) {
     // Match ::: mermaid ... ::: blocks
     const mermaidRegex = /::: mermaid([\s\S]*?):::/g;
@@ -56,7 +58,9 @@ async function loadSidebar() {
 
   try {
     const res = await fetch("../data/topics.json");
-    const topics = await res.json();
+    jsonData = await res.json();
+
+    topics = jsonData;
 
     sidebar.innerHTML = ""; // clear loader
 
@@ -144,6 +148,37 @@ async function loadPost(post, category) {
 
 }
 
+async function getIdFromUrl() {
+  console.log("URI triggered");
+  const urlParams = new URLSearchParams(window.location.search);
+  const id = urlParams.get('id'); // Get the 'id' query parameter from the URL
 
-loadSidebar();
-//loadSidebarLocal(); //local testing variable
+  const topics = jsonData; // Assuming jsonData is already loaded with the posts
+
+  // Loop through each category in the topics
+  for (const category in topics) {
+    // Loop through each post in the category
+    for (const post of topics[category]) {
+      // Remove the ".md" extension from post.file to compare with the URL id
+      const postId = post.file.replace('.md', '').split('/').pop(); // Extracts the last part of the file path (without .md)
+
+      // Check if the id from the URL matches the postId
+      if (id === postId) {
+        // If they match, load the post
+        loadPost(post, category);
+        return; // Exit after finding the matching post
+      }
+    }
+  }
+}
+
+
+
+async function initializeBlogPage() {
+
+  //functions
+  await loadSidebar();
+  getIdFromUrl();
+}
+
+window.addEventListener('load', initializeBlogPage);
