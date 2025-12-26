@@ -142,7 +142,8 @@ async function loadPost(post, category) {
   loadContent(test,"article-content");
 
   // Scroll to top of article
-  document.querySelector(".layout").scrollTo(50, 0);
+  let testing = document.getElementsByClassName('blog-content')[0];
+  testing.scrollTo(0,0);
 
   
 
