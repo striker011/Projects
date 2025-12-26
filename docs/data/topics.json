@@ -41,12 +41,6 @@
       "file":"../project_pages/markdown_commands.md",
       "github":"source/website/posts/genai/llm_basics.md",
       "updated":"2025-01-05"
-    },
-    {
-      "title":"mermaid",
-      "file":"../project_pages/mermaid.md",
-      "github":"test.md",
-      "updated":"2025-01-05"
     }
   ]
 }
