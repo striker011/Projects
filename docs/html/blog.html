@@ -5,13 +5,30 @@
   <title>Blog</title>
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/blog.css" />
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+  console.log("Initializing Mermaid...");
+  mermaid.initialize({ startOnLoad: true });
+
+  // Log that initialization is done
+  mermaid.contentLoaded = (() => {
+    const original = mermaid.contentLoaded;
+    return () => {
+      console.log("Mermaid contentLoaded triggered!");
+      original();
+    };
+  })();
+</script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mermaid/6.0.0/mermaid.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/6.0.0/mermaid.js"></script>
 </head>
 
 <body>
- <div id="nav-placeholder"></div>
-<div class="layout">
+
+  <div id="nav-placeholder"></div>
+  <div class="layout">
 
   <!-- SIDEBAR -->
   <aside class="blog-sidebar">
@@ -24,7 +41,6 @@
 
   <!-- MAIN CONTENT -->
   <main class="blog-content">
-
     <!-- ARTICLE HEADER -->
     <div id="article-header" class="blog-article-header hidden">
       <h1 id="article-title">Blog Title</h1>

@@ -1,6 +1,53 @@
-//lokal testing setting
+function transformMermaidBlocks(text) {
+    // Match ::: mermaid ... ::: blocks
+    const mermaidRegex = /::: mermaid([\s\S]*?):::/g;
+    
+    // Match <pre><code class="language-mermaid">...</code></pre> blocks
+    const preCodeRegex = /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g;
 
+    // Replace ::: mermaid ... ::: blocks with <pre><code class="mermaid">...</code></pre>
+    let transformedText = text.replace(mermaidRegex, (match, code) => {
+        const cleanedCode = code.trim().replace(/&gt;/g, '>');  // Fix HTML entities
+        return `<pre><code class="mermaid">${cleanedCode}</code></pre>`;
+    });
 
+    // Replace <pre><code class="language-mermaid">...</code></pre> blocks with <pre><code class="mermaid">...</code></pre>
+    transformedText = transformedText.replace(preCodeRegex, (match, code) => {
+        const cleanedCode = code.trim().replace(/&gt;/g, '>');  // Fix HTML entities
+        return `<pre><code class="mermaid">${cleanedCode}</code></pre>`;
+    });
+
+    return transformedText;
+}
+
+function loadContent(newContent,contentID){
+  const container = document.getElementById(contentID);
+
+  // Log the action of adding new content
+  console.log("Loading new content into container...");
+  
+  // Add new content to the container
+  container.innerHTML = newContent;
+
+  // Log that the content has been loaded into the container
+  console.log("New content loaded:", newContent);
+
+  // Now call mermaid to render the new diagrams
+  console.log("Triggering Mermaid contentLoaded for new content...");
+  mermaid.contentLoaded();
+
+  /*
+      // Render Markdown
+  var test = marked.parse(text);
+  //console.log(test);
+  console.log("TRANSFORMATION______________________________________");
+  //test = transformMermaidBlocks(test);
+  document.getElementById("article-content").innerHTML = test;
+  //console.log(test);
+  
+  mermaid.contentLoaded();
+  */
+}
 
 // Load topics.json and build sidebar
 async function loadSidebar() {
@@ -86,17 +133,15 @@ async function loadPost(post, category) {
   const res = await fetch(post.file);
   const text = await res.text();
 
-  // Render Markdown
-  document.getElementById("article-content").innerHTML = marked.parse(text);
-
-  // Run Mermaid
-  if (text.includes("```mermaid")) {
-    mermaid.run();
-    await mermaid.run({ querySelector: "#article-content .mermaid" });
-  }
+  var test = marked.parse(text);
+  test = transformMermaidBlocks(test);
+  loadContent(test,"article-content");
 
   // Scroll to top of article
-  document.querySelector(".content").scrollTo(0, 0);
+  document.querySelector(".layout").scrollTo(50, 0);
+
+  
+
 }
 
 
