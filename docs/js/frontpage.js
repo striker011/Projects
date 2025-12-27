@@ -1,11 +1,22 @@
 const pathToJSONPrefix = "../data/"
 
+function extractFileName(filePath) {
+
+    const fileNameWithExtension = filePath.split('/').pop();  
+
+    const fileName = fileNameWithExtension.replace('.md', '');
+
+    return fileName;
+}
+
 function openProject(id){
-
+  window.location.href=`blog.html?id=${id}`;
 }
-function openBlog(id){
-
+function openBlog(title){
+  window.location.href=`blog.html?id=${title}`;
 }
+
+
 
 async function loadJSON(jsonPath){
     const res = await fetch(pathToJSONPrefix+jsonPath);
@@ -87,6 +98,7 @@ async function loadLatestThreeBlogPosts(){
             const card = document.createElement("div");
             card.className = "blog-card";
             
+            let title = extractFileName(text.file);
 
             card.innerHTML = `
             <h3>${text.title}</h3>
@@ -94,7 +106,7 @@ async function loadLatestThreeBlogPosts(){
 
 
             <div class="project-actions">
-                <button type="button" class="btn-small" onclick="openBlog('${text.id}')">Read More</button>
+                <button type="button" class="btn-small" onclick="openBlog('${title}')">Read More</button>
             </div>
             `;
 
