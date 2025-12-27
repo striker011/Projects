@@ -117,3 +117,56 @@ Alle Dokumente in einem finalen *Kafka-Machbarkeitsstudium* bündeln.
 ---
 
 Start: **22.09.2025**
+
+--- 
+Progammieraufbau
+
+**Alter Aufbau**
+
+```mermaid
+graph TD;
+    IoT_Geraete["IoT-Geräte"] --> EMQP
+    EMQP --> ML_Server["ML-Server"]
+    EMQP --> DB["Datenbank"]
+    EMQP --> FileServer
+    ML_Server --> Schnelle_Daten
+    DB --> Mittel_schnelle_Daten
+    FileServer --> Langsame_Daten
+```
+
+Diesen kann man einfach simulieren und nachbauen
+
+**Neuer Aufbau**
+
+```mermaid
+graph TD;
+    IoT_Geraete["IoT-Geräte"] --> Kafka
+    Kafka --> Filehosting
+    Kafka --> Schnelle_Daten
+    Kafka --> Mittel_schnelle_Daten
+    Filehosting --> Langsame_Daten
+```
+
+Iot Geräte kann man schnell bauen, Kafka muss ich aufsetzten und dann C# von Confluent verwenden
+
+Insgesamt benötige ich:
+
+- IoT-Devices (Variation)
+- Konsumer (Variation)
+- ML_Server
+- DB
+- EMQP Setup
+- Kafka Setup
+
+Idee:
+
+- MicroServices ( C# )
+    - IoT-Devices (Variation)
+    - Konsumer (Variation)
+- Needs Datatransformtion capabilites plus some time dilation ( C++ ?)
+    - ML_Server
+    - DB
+    - FileServer
+- Download Clients and connect via API ( C# connectors )
+    - EMQP Setup
+    - Kafka Setup
