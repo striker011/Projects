@@ -12,8 +12,7 @@
     },
     {
       "id": "Quant Trading Stack",
-      "keywords": ["order book matcher", "backtester", "portfolio optimizer", "signal math", "probability", "optimization"],
-      "tech": ["test"]
+      "keywords": ["order book matcher", "backtester", "portfolio optimizer", "signal math", "probability", "optimization"]
     },
     {
       "id": "Data & Pipelines",
@@ -42,7 +41,7 @@
       "title": "Kafka Simulation & Benchmarking",
       "description": "Experimentelle Simulation und Evaluierung von Kafka-Konfigurationen basierend auf meiner Bachelorarbeit.",
       "file": "projects/kafka_simulation.md",
-      "github": "https://github.com/striker011/Projects/tree/main/source/website/projects/kafka_simulation",
+      "github": "https://github.com/striker011/Projects/tree/main/source/kafka_simulation",
       "tech": ["C#", "Kafka", "Distributed Systems", "Simulation"],
       "updated": "2025-01-12"
     },

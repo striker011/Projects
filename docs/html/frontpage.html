@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Jan-Henrik Keller – Portfolio</title>
+    <title>Portfolio</title>
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/frontpage.css" />
 </head>
@@ -27,17 +27,7 @@
 <!-- ======================== TECH STACK ======================== -->
 <section class="section">
     <h2 class="section-title">Tech Stack</h2>
-    <div class="tech-grid">
-        <span class="badge">C#</span>
-        <span class="badge">C++</span>
-        <span class="badge">Python</span>
-        <span class="badge">Kafka</span>
-        <span class="badge">.NET / MAUI</span>
-        <span class="badge">Linux</span>
-        <span class="badge">Git/GitHub</span>
-        <span class="badge">SQL</span>
-        <span class="badge">Node.js</span>
-        <span class="badge">Mermaid</span>
+    <div class="tech-grid" id="techGrid">
     </div>
 </section>
 
@@ -45,34 +35,8 @@
 <section class="section">
     <h2 class="section-title">Featured Projects</h2>
 
-    <div class="project-grid">
+    <div class="project-grid" id="projectGrid">
 
-        <div class="project-card">
-            <h3>Kafka Simulation & Benchmarking</h3>
-            <p>Simulation und Evaluierung von Kafka Throughput, Latenz und Konfigurationen basierend auf meiner Bachelorarbeit.</p>
-            <div class="project-actions">
-                <a href="project_post.html?id=kafka_simulation" class="btn-small">Read More</a>
-                <a href="https://github.com/striker011/Projects" target="_blank" class="btn-small">GitHub ↗</a>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <h3>Finance Manager App</h3>
-            <p>.NET MAUI App mit SQLite, Income/Expense Tracking, Kategorien und Budgetverwaltung.</p>
-            <div class="project-actions">
-                <a href="project_post.html?id=financemanager" class="btn-small">Read More</a>
-                <a href="https://github.com/striker011/Projects" target="_blank" class="btn-small">GitHub ↗</a>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <h3>AssetCreator Tool</h3>
-            <p>C# Tool zur dynamischen XML-Asset-Generierung mit Reflection und UI.</p>
-            <div class="project-actions">
-                <a href="project_post.html?id=assetcreator" class="btn-small">Read More</a>
-                <a href="https://github.com/striker011/Projects" target="_blank" class="btn-small">GitHub ↗</a>
-            </div>
-        </div>
 
     </div>
 </section>
@@ -81,25 +45,7 @@
 <section class="section">
     <h2 class="section-title">Latest Blog Posts</h2>
 
-    <div class="blog-preview-grid">
-
-        <div class="blog-card">
-            <h3>Returns & Variance</h3>
-            <p>Ein mathematischer Einstieg in erwartete Renditen, Varianz und Risikomaße – Grundsteine für Quant Modelle.</p>
-            <a href="blog.html?topic=Quant&post=returns.md" class="btn-small">Read More</a>
-        </div>
-
-        <div class="blog-card">
-            <h3>Linear Algebra Intro</h3>
-            <p>Grundlagen der Linearen Algebra für Machine Learning und Quantitative Methoden.</p>
-            <a href="blog.html?topic=Math&post=linear_algebra.md" class="btn-small">Read More</a>
-        </div>
-
-        <div class="blog-card">
-            <h3>Backtesting Basics</h3>
-            <p>Wie man einfache Trading-Strategien korrekt analysiert, simuliert und bewertet.</p>
-            <a href="blog.html?topic=Quant&post=backtesting_intro.md" class="btn-small">Read More</a>
-        </div>
+    <div class="blog-preview-grid" id="blogGrid">
 
     </div>
 </section>
@@ -126,4 +72,5 @@
 </footer>
 
 </body>
+<script src="../js/frontpage.js"></script>
 </html>
