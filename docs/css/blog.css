@@ -1,5 +1,4 @@
 
-
 /* SIDEBAR -------------------------------------------------------- */
 
 .blog-sidebar {
@@ -112,3 +111,106 @@
 
 
 
+
+/* =================== MOBILE =====================*/
+
+/* =================== General Styles =================== */
+
+/* Make sidebar and content stack on mobile */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column; /* Stack sidebar on top of content */
+  }
+
+  .blog-sidebar {
+    width: 100%; /* Full width sidebar on mobile */
+    margin-bottom: 1rem; /* Add margin to create space below */
+  }
+
+  .blog-content {
+    margin-left: 0; /* Remove margin-left for mobile */
+    padding-left: 1rem; /* Reduced padding */
+    padding-right: 1rem; /* Reduced padding */
+    max-width: 100%; /* Ensure content uses full width */
+  }
+  
+  /* Adjust heading sizes on mobile */
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  .about-text {
+    font-size: 1rem;
+  }
+
+  .sidebar-category {
+    font-size: 0.9rem;
+  }
+
+  .sidebar-post {
+    font-size: 0.8rem;
+  }
+}
+
+/* =================== Mobile (Phone) Adjustments =================== */
+
+@media (max-width: 480px) {
+  .blog-sidebar {
+    width: 100%; /* Full width on mobile */
+    padding: 1rem 0; /* Add padding to give space */
+    font-size: 0.9rem;
+  }
+
+  .blog-sidebar-title {
+    font-size: 1.1rem; /* Adjust title size for smaller screens */
+  }
+
+  .blog-content {
+    padding-left: 0.5rem; /* Even smaller padding */
+    padding-right: 0.5rem;
+  }
+
+  .footer {
+    padding: 1rem; /* Reduce footer padding */
+    font-size: 0.9rem; /* Adjust font size */
+  }
+
+  /* Adjust scrollbars for mobile */
+  ::-webkit-scrollbar {
+    width: 6px; /* Thinner scrollbar */
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #4b4b85;
+    border-radius: 3px;
+  }
+}
+
+/* =================== Small Screens =================== */
+
+/* For very small screens or if you want to hide some elements */
+@media (max-width: 320px) {
+  .blog-sidebar {
+    display: none; /* Hide sidebar on very small screens */
+  }
+
+  .blog-content {
+    padding-left: 0.25rem; /* Further reduce padding */
+    padding-right: 0.25rem;
+  }
+
+  h1 {
+    font-size: 1.3rem; /* Reduce the font size of headings */
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+}
