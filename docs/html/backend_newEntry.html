@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Portfolio Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1e293b 0%, #7e22ce 50%, #1e293b 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #e9d5ff;
+            margin-bottom: 2rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section h2 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            color: #e9d5ff;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.5rem;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: rgba(233, 213, 255, 0.5);
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #a78bfa;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.8rem;
+        }
+
+        input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            cursor: pointer;
+        }
+
+        .tech-input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 1rem;
+            align-items: end;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .btn-add {
+            background: #7c3aed;
+            color: white;
+        }
+
+        .btn-add:hover {
+            background: #6d28d9;
+        }
+
+        .btn-generate {
+            background: linear-gradient(to right, #7c3aed, #3b82f6);
+            color: white;
+            width: 100%;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-generate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-generate:disabled {
+            background: #6b7280;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-download {
+            background: #10b981;
+            color: white;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .btn-download:hover {
+            background: #059669;
+        }
+
+        .tech-list {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tech-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .tech-name {
+            color: white;
+            font-weight: 600;
+        }
+
+        .tech-category {
+            color: #e9d5ff;
+            margin-left: 1rem;
+        }
+
+        .btn-remove {
+            background: #ef4444;
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-remove:hover {
+            background: #dc2626;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .alert-info {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: #e9d5ff;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.5);
+            color: #d1fae5;
+        }
+
+        .preview {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        .preview h3 {
+            color: #93c5fd;
+            margin-bottom: 0.5rem;
+        }
+
+        .preview ol {
+            color: #bfdbfe;
+            padding-left: 1.5rem;
+        }
+
+        .preview li {
+            margin-bottom: 0.5rem;
+        }
+
+        .preview code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+        }
+
+        .file-list {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .file-item {
+            color: #e9d5ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Project Portfolio Manager</h1>
+        <p class="subtitle">Erstelle neue Projekte für dein Portfolio</p>
+
+        <div id="successAlert" class="alert alert-success hidden">
+            <span>✅</span>
+            <span>Dateien erfolgreich generiert!</span>
+        </div>
+
+        <!-- Basic Info -->
+        <div class="section">
+            <h2>Projekt Grundinformationen</h2>
+            <label>Projektname (für Ordner) *</label>
+            <input type="text" id="projectName" placeholder="z.B. my-awesome-project">
+
+            <label>Projekt Titel *</label>
+            <input type="text" id="projectTitle" placeholder="z.B. My Awesome Project">
+
+            <label>Beschreibung</label>
+            <textarea id="projectDescription" placeholder="Beschreibe dein Projekt..."></textarea>
+        </div>
+
+        <!-- Topics.json -->
+        <div class="section">
+            <h2>Topics.json Eintrag (5 Felder)</h2>
+            <div class="grid">
+                <div>
+                    <label>Topic ID (optional)</label>
+                    <input type="text" id="topicId" placeholder="Auto-generiert">
+                </div>
+                <div>
+                    <label>Topic Titel (optional)</label>
+                    <input type="text" id="topicTitle" placeholder="Verwendet Projekt Titel">
+                </div>
+            </div>
+
+            <label>Topic Beschreibung (optional)</label>
+            <input type="text" id="topicDescription" placeholder="Verwendet Projekt Beschreibung">
+
+            <div class="grid">
+                <div>
+                    <label>Icon</label>
+                    <input type="text" id="topicIcon" placeholder="📦" value="📦">
+                </div>
+                <div>
+                    <label>Color (Hex)</label>
+                    <input type="text" id="topicColor" placeholder="#3b82f6" value="#3b82f6">
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects.json -->
+        <div class="section">
+            <h2>Projects.json Eintrag (6 Felder)</h2>
+            <label>Project ID (optional)</label>
+            <input type="text" id="projectId" placeholder="Auto-generiert">
+
+            <label>Bild URL</label>
+            <input type="text" id="projectImageUrl" placeholder="/images/projects/my-project.png">
+
+            <div class="grid">
+                <div>
+                    <label>GitHub URL</label>
+                    <input type="text" id="projectGithubUrl" placeholder="https://github.com/...">
+                </div>
+                <div>
+                    <label>Live URL</label>
+                    <input type="text" id="projectLiveUrl" placeholder="https://...">
+                </div>
+            </div>
+
+            <div class="grid">
+                <div>
+                    <label>Datum</label>
+                    <input type="date" id="projectDate">
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="projectFeatured">
+                    <label for="projectFeatured" style="margin-bottom: 0;">Featured Project</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="section">
+            <h2>Tech Stack (2 Felder)</h2>
+            
+            <div class="alert alert-info">
+                <span>ℹ️</span>
+                <span>Duplikate werden automatisch beim Zusammenführen mit techstack.json verhindert</span>
+            </div>
+
+            <div class="tech-input-group">
+                <div>
+                    <label>Tech Name</label>
+                    <input type="text" id="techName" placeholder="z.B. React">
+                </div>
+                <div>
+                    <label>Kategorie</label>
+                    <input type="text" id="techCategory" placeholder="z.B. Frontend">
+                </div>
+                <button class="btn-add" onclick="addTech()">➕ Add</button>
+            </div>
+
+            <div id="techList" class="tech-list hidden">
+                <h3 style="color: white; margin-bottom: 0.75rem;">Hinzugefügte Technologies:</h3>
+                <div id="techItems"></div>
+            </div>
+        </div>
+
+        <!-- Generate Button -->
+        <button class="btn-generate" onclick="generateFiles()">Dateien Generieren</button>
+        <button id="downloadBtn" class="btn-download hidden" onclick="downloadAll()">⬇️ Alle Herunterladen</button>
+
+        <!-- Preview -->
+        <div id="preview" class="preview hidden">
+            <h3>📁 Nächste Schritte:</h3>
+            <ol>
+                <li>Erstelle Ordner: <code id="folderPath"></code></li>
+                <li>Füge den topics.json Eintrag zu <code>data/topics.json</code> unter "Projects" hinzu</li>
+                <li>Füge den projects.json Eintrag zu <code>data/projects.json</code> unter "projects" hinzu</li>
+                <li>Füge die techstack Einträge zu <code>data/techstack.json</code> hinzu (prüfe Duplikate!)</li>
+                <li>Speichere die .md Datei in <code>project_pages/</code></li>
+            </ol>
+
+            <div class="file-list">
+                <h3 style="color: white; margin-bottom: 0.5rem;">Generated Files:</h3>
+                <div class="file-item">✓ topics-entry.json</div>
+                <div class="file-item">✓ projects-entry.json</div>
+                <div class="file-item">✓ techstack-entries.json</div>
+                <div class="file-item" id="mdFileName">✓ project.md</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let techStack = [];
+        let generatedFiles = null;
+
+        // Set today's date as default
+        document.getElementById('projectDate').valueAsDate = new Date();
+
+        function addTech() {
+            const name = document.getElementById('techName').value.trim();
+            const category = document.getElementById('techCategory').value.trim();
+
+            if (name && category) {
+                techStack.push({ name, category });
+                document.getElementById('techName').value = '';
+                document.getElementById('techCategory').value = '';
+                renderTechList();
+            }
+        }
+
+        function removeTech(index) {
+            techStack.splice(index, 1);
+            renderTechList();
+        }
+
+        function renderTechList() {
+            const container = document.getElementById('techList');
+            const itemsContainer = document.getElementById('techItems');
+
+            if (techStack.length === 0) {
+                container.classList.add('hidden');
+                return;
+            }
+
+            container.classList.remove('hidden');
+            itemsContainer.innerHTML = techStack.map((tech, index) => `
+                <div class="tech-item">
+                    <div>
+                        <span class="tech-name">${tech.name}</span>
+                        <span class="tech-category">(${tech.category})</span>
+                    </div>
+                    <button class="btn-remove" onclick="removeTech(${index})">🗑️ Remove</button>
+                </div>
+            `).join('');
+        }
+
+        function generateFiles() {
+            const projectName = document.getElementById('projectName').value.trim();
+            const projectTitle = document.getElementById('projectTitle').value.trim();
+
+            if (!projectName || !projectTitle) {
+                alert('Bitte fülle mindestens Projektname und Titel aus!');
+                return;
+            }
+
+            const projectDescription = document.getElementById('projectDescription').value.trim();
+            const projectId = projectName.toLowerCase().replace(/\s+/g, '-');
+
+            // Topics.json entry
+            const topicsEntry = {
+                id: document.getElementById('topicId').value.trim() || projectId,
+                title: document.getElementById('topicTitle').value.trim() || projectTitle,
+                description: document.getElementById('topicDescription').value.trim() || projectDescription,
+                icon: document.getElementById('topicIcon').value.trim() || '📦',
+                color: document.getElementById('topicColor').value.trim() || '#3b82f6'
+            };
+
+            // Projects.json entry
+            const projectsEntry = {
+                id: document.getElementById('projectId').value.trim() || projectId,
+                title: projectTitle,
+                description: projectDescription,
+                image: document.getElementById('projectImageUrl').value.trim() || '/images/projects/placeholder.png',
+                github: document.getElementById('projectGithubUrl').value.trim(),
+                live: document.getElementById('projectLiveUrl').value.trim(),
+                date: document.getElementById('projectDate').value || new Date().toISOString().split('T')[0],
+                featured: document.getElementById('projectFeatured').checked,
+                tags: techStack.map(t => t.name)
+            };
+
+            // Tech stack entries
+            const techStackEntries = techStack.map(tech => ({
+                name: tech.name,
+                category: tech.category
+            }));
+
+            // Markdown file
+            const markdownContent = `---
+title: "${projectTitle}"
+description: "${projectDescription}"
+date: ${projectsEntry.date}
+tags: [${techStack.map(t => `"${t.name}"`).join(', ')}]
+featured: ${projectsEntry.featured}
+---
+
+# ${projectTitle}
+
+## Übersicht
+
+${projectDescription}
+
+## Technologien
+
+${techStack.map(t => `- ${t.name}`).join('\n')}
+
+## Features
+
+- Feature 1
+- Feature 2
+- Feature 3
+
+## Installation
+
+\`\`\`bash
+# Anleitung folgt
+\`\`\`
+
+## Links
+
+${projectsEntry.github ? `- [GitHub Repository](${projectsEntry.github})` : ''}
+${projectsEntry.live ? `- [Live Demo](${projectsEntry.live})` : ''}
+`;
+
+            generatedFiles = {
+                topics: topicsEntry,
+                projects: projectsEntry,
+                techstack: techStackEntries,
+                markdown: markdownContent,
+                folderName: projectName,
+                fileName: projectId
+            };
+
+            // Show success and preview
+            document.getElementById('successAlert').classList.remove('hidden');
+            document.getElementById('downloadBtn').classList.remove('hidden');
+            document.getElementById('preview').classList.remove('hidden');
+            document.getElementById('folderPath').textContent = `source/${projectName}/`;
+            document.getElementById('mdFileName').textContent = `✓ ${projectId}.md`;
+
+            setTimeout(() => {
+                document.getElementById('successAlert').classList.add('hidden');
+            }, 3000);
+        }
+
+        function downloadFile(content, filename) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function downloadAll() {
+            if (!generatedFiles) return;
+
+            downloadFile(JSON.stringify(generatedFiles.topics, null, 2), 'topics-entry.json');
+            downloadFile(JSON.stringify(generatedFiles.projects, null, 2), 'projects-entry.json');
+            downloadFile(JSON.stringify(generatedFiles.techstack, null, 2), 'techstack-entries.json');
+            downloadFile(generatedFiles.markdown, `${generatedFiles.fileName}.md`);
+        }
+
+        // Allow Enter key to add tech
+        document.getElementById('techCategory').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addTech();
+            }
+        });
+    </script>
+</body>
+</html>
