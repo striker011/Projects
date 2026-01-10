@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "M8KDSjgXRF4=",
+  "dgSpecHash": "1HyIyr8W1Go=",
   "success": true,
   "projectFilePath": "G:\\Arbeit\\CV_Projekte\\Github\\Projects\\source\\kafka_simulation\\MicroService\\MicroService.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\henri\\.nuget\\packages\\confluent.kafka\\2.13.0\\confluent.kafka.2.13.0.nupkg.sha512",
+    "C:\\Users\\henri\\.nuget\\packages\\librdkafka.redist\\2.13.0\\librdkafka.redist.2.13.0.nupkg.sha512",
     "C:\\Users\\henri\\.nuget\\packages\\microsoft.extensions.configuration\\9.0.11\\microsoft.extensions.configuration.9.0.11.nupkg.sha512",
     "C:\\Users\\henri\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\9.0.11\\microsoft.extensions.configuration.abstractions.9.0.11.nupkg.sha512",
     "C:\\Users\\henri\\.nuget\\packages\\microsoft.extensions.configuration.binder\\9.0.11\\microsoft.extensions.configuration.binder.9.0.11.nupkg.sha512",
