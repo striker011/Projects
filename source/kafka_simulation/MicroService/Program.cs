@@ -4,11 +4,13 @@ var builder = Host.CreateApplicationBuilder(args);
 
 //works
 /*
-builder.Services.AddHostedService<Consumer>();
-builder.Services.AddHostedService<Producer>();
 builder.Services.AddHostedService<MLServer>();
 builder.Services.AddHostedService<Fileserver>();
 builder.Services.AddHostedService<DB>();
+
+
+
+//alles ROTZE!!!!!!!!!!!!!, muss entweder Transient sein oder ein Manager der Threads hosted
 builder.Services.AddSingleton<IMessageProducer, KafkaProducerClient>();
 
 

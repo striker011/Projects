@@ -4,9 +4,12 @@ public class Fileserver : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
 
-    public Fileserver(ILogger<Worker> logger)
+    public IEnumerable<IMessageConsumer> _messageConsumers;
+
+    public Fileserver(ILogger<Worker> logger, IEnumerable<IMessageConsumer> messageConsumers)
     {
         _logger = logger;
+        _messageConsumers = messageConsumers;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)

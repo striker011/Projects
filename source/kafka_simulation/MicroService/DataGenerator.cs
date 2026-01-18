@@ -19,8 +19,8 @@ public class DataGenerator
         var (tag, targetBytes) = mode switch
         {
             PayloadMode.Leicht => ("LEICHT", 128),
-            PayloadMode.Mittel => ("MITTEL", 2 * 1024),
-            PayloadMode.Schwer => ("SCHWER", 64 * 1024),
+            PayloadMode.Mittel => ("MITTEL", 512),
+            PayloadMode.Schwer => ("SCHWER", 1024),
             _ => throw new ArgumentOutOfRangeException(nameof(mode))
         };
 

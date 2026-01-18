@@ -1,12 +1,14 @@
 namespace MicroService;
 
-public class MLServer : BackgroundService
+public class DB : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
+    public IEnumerable<IMessageConsumer> _messageConsumers;
 
-    public MLServer(ILogger<Worker> logger)
+    public DB(ILogger<Worker> logger, IEnumerable<IMessageConsumer> messageConsumers)
     {
         _logger = logger;
+        _messageConsumers  = messageConsumers;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -15,7 +17,7 @@ public class MLServer : BackgroundService
         {
             if (_logger.IsEnabled(LogLevel.Information))
             {
-                _logger.LogInformation("MLServer running at: {time}", DateTimeOffset.Now);
+                _logger.LogInformation("DB running at: {time}", DateTimeOffset.Now);
             }
             await Task.Delay(1000, stoppingToken);
         }
