@@ -109,6 +109,11 @@ function loadSidebarLocal() {
   }
 }
 
+function isLocalhost() {
+    const hostname = window.location.hostname;
+    return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
+}
+
 async function loadPost(post, category) {
   // Show header section
   document.getElementById("article-header").classList.remove("hidden");
@@ -123,7 +128,7 @@ async function loadPost(post, category) {
   document.getElementById("article-updated").textContent = post.updated || "Unknown";
 
   if(post.github){
-    document.getElementById("article-github").href = `https://github.com/striker011/Projects/blob/main/${post.github}`;
+    document.getElementById("article-github").href = `https://github.com/striker011/Projects/blob/main/source/${post.github}`;
     document.getElementById("article-github").style.display ="inline";
   }else{
     document.getElementById("article-github").style.display ="none";
@@ -133,8 +138,18 @@ async function loadPost(post, category) {
     "https://github.com/striker011/Projects/blob/main/" + post.github;
     */
 
+  var url = "https://github.com/striker011/Projects/blob/main/source/"+post.github;
+
   // Load Markdown file
-  const res = await fetch(post.file);
+  var res;
+
+  if(isLocalhost()){
+  res = await fetch(post.file);
+  }else{
+    res = await fetch(url);
+  }
+
+  
   const text = await res.text();
 
   var test = marked.parse(text);

@@ -3,14 +3,14 @@
     {
       "title" : "Kafka",
       "file"  : "../../source/kafka_simulation/kafka_simulation.md",
-      "github": "source/website/project/kafka.md",
-      "updated":"2025-01-05",
+      "github": "kafka_simulation/kafka_simulation.md",
+      "updated":"2025-11-05",
       "intro":"Kleine Demonstration meiner Bachelorarbeit"
     },
     {
       "title" : "Low Latency Pipeline",
       "file" : "../../source/Low_Latency_Market_Data_Pipeline/LowLatencyMarketDataPipeline.md",
-      "github":"source/Low_Latency_Market_Data_Pipeline/LowLatencyMarketDataPipeline.md",
+      "github":"Low_Latency_Market_Data_Pipeline/LowLatencyMarketDataPipeline.md",
       "updates":"2026-01-22",
       "intro":"Übersicht über meine Low Latency Pipeline"
     }
