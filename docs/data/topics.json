@@ -1,61 +1,18 @@
-{
-  "Quant": [
-    {
-      "title": "Returns & Variance",
-      "file": "../posts/quant/returns.md",
-      "github": "source/website/posts/quant/returns.md",
-      "updated": "2025-01-12",
-      "intro":"Ein mathematischer Einstieg in erwartete Renditen, Varianz und Risikomaße – Grundsteine für Quant Modelle."
-    },
-    {
-      "title": "Backtesting Basics",
-      "file": "../posts/quant/backtesting_intro.md",
-      "github": "source/website/posts/quant/backtesting_intro.md",
-      "updated": "2025-01-08",
-      "intro":"Wie man einfache Trading-Strategien korrekt analysiert, simuliert und bewertet."
-    }
-  ],
-  "Math": [
-    {
-      "title": "Linear Algebra Intro",
-      "file": "../posts/math/linear_algebra.md",
-      "github": "source/website/posts/math/linear_algebra.md",
-      "updated": "2025-01-10",
-      "intro":"Grundlagen der Linearen Algebra für Machine Learning und Quantitative Methoden."
-    }
-  ],
-  "GenAI": [
-    {
-      "title": "LLM Basics",
-      "file": "../posts/genai/llm_basics.md",
-      "github": "source/website/posts/genai/llm_basics.md",
-      "updated": "2025-01-05",
-      "intro":"test"
-    }
-  ],
-  "Misc" : [
-    {
-      "title":"md commands",
-      "file":"../project_pages/markdown_commands.md",
-      "github":"source/website/posts/genai/llm_basics.md",
-      "updated":"2025-01-05",
-      "intro":"test"
-    }
-  ],
+{ 
   "Projects":[
     {
       "title" : "Kafka",
       "file"  : "../../source/kafka_simulation/kafka_simulation.md",
       "github": "source/website/project/kafka.md",
       "updated":"2025-01-05",
-      "intro":"Test"
+      "intro":"Kleine Demonstration meiner Bachelorarbeit"
     },
     {
       "title" : "Low Latency Pipeline",
       "file" : "../../source/Low_Latency_Market_Data_Pipeline/LowLatencyMarketDataPipeline.md",
       "github":"source/Low_Latency_Market_Data_Pipeline/LowLatencyMarketDataPipeline.md",
       "updates":"2026-01-22",
-      "intro":"test"
+      "intro":"Übersicht über meine Low Latency Pipeline"
     }
   ]
 }

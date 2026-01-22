@@ -60,7 +60,7 @@
       "description": "Mobile App in .NET MAUI mit SQLite, Budgetverwaltung, Transaktionen, Kategorien und automatischen Statistiken.",
       "file": "projects/finance_manager.md",
       "github": "https://github.com/striker011/Projects/tree/main/source/website/projects/finance_manager",
-      "tech": [".NET MAUI", "C#", "SQLite", "MVVM"],
+      "stech": [".NET MAUI", "C#", "SQLite", "MVVM"],
       "updated": "2024-12-20"
     },
     {
@@ -69,7 +69,7 @@
       "description": "C# Tool zur XML-Generierung dynamischer Objekte und Templates mit Reflection / Editor Oberfläche.",
       "file": "projects/asset_creator.md",
       "github": "https://github.com/striker011/Projects/tree/main/source/website/projects/asset_creator",
-      "tech": ["C#", "Reflection", "XML", "UI Toolkit"],
+      "stech": ["C#", "Reflection", "XML", "UI Toolkit"],
       "updated": "2024-11-10"
     }
   ]
