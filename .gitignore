@@ -2,6 +2,7 @@ Projects.sln
 ProjectPlan.txt
 sshKey
 sshKeyFingerprint
+sshKey.pub
 sshHelp.txt
 test.txt
 .vscode
