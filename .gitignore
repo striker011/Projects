@@ -3,3 +3,11 @@ sshKeyFingerprint
 sshHelp.txt
 test.txt
 .vscode
+source/Low_Latency_Market_Data_Pipeline/.vs/
+source/Low_Latency_Market_Data_Pipeline/out/
+
+source/kafka_simulation/bin/
+source/kafka_simulation/obj/
+
+source/kafka_simulation/MicroService/bin/
+source/kafka_simulation/MicroService/obj/
