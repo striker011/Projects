@@ -6,7 +6,7 @@
       "description":"A small low latency pipline to transfer signals.",
       "file":"projects/low_latency_pipeline.md",
       "github": "https://github.com/striker011/Projects/tree/main/source/Low_Latency_Market_Data_Pipeline",
-      "tech": ["C++", "C", "lockless Rinbuffer", "multithreading"],
+      "tech": ["C++", "C", "lockless Ringbuffer", "multithreading"],
       "updated": "2026-01-22"
     },
     {
