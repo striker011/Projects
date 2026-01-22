@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "Low_Latency_Market_Data_Pipeline",
+		"source" : "Low_Latency_Market_Data_Pipeline"
+	}
+}
