@@ -1,8 +1,11 @@
+Projects.sln
+ProjectPlan.txt
 sshKey
 sshKeyFingerprint
 sshHelp.txt
 test.txt
 .vscode
+
 source/Low_Latency_Market_Data_Pipeline/.vs/
 source/Low_Latency_Market_Data_Pipeline/out/
 
