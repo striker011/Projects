@@ -138,15 +138,15 @@ async function loadPost(post, category) {
     "https://github.com/striker011/Projects/blob/main/" + post.github;
     */
 
-  var url = "https://github.com/striker011/Projects/blob/main/source/"+post.github;
+  var url = "https://raw.githubusercontent.com/striker011/Projects/main/source/"+post.github;
 
   // Load Markdown file
   var res;
 
   if(isLocalhost()){
-  res = await fetch(post.file);
+     res = await fetch(url);
   }else{
-    res = await fetch(url);
+    res = await fetch(post.file);
   }
 
   
