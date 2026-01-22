@@ -1,7 +1,5 @@
 # Kafka Simulation
 
-# Update: 22.01.2026 20:20
-
 ## Basiert auf meiner Abschlussarbeit
 
 ### Übersicht
