@@ -1,0 +1,6 @@
+SignalRingBuffer is active.
+Wrote Signal: ID: 0, Value: 0, Second: 0  and read Signal: ID: 0, Value: 0, Second: 0
+Wrote Signal: ID: 1, Value: 0.5, Second: 1  and read Signal: ID: 1, Value: 0.5, Second: 1
+Wrote Signal: ID: 2, Value: 1, Second: 2  and read Signal: ID: 2, Value: 1, Second: 2
+Wrote Signal: ID: 3, Value: 1.5, Second: 3  and read Signal: ID: 3, Value: 1.5, Second: 3
+Wrote Signal: ID: 4, Value: 2, Second: 4  and read Signal: ID: 4, Value: 2, Second: 4

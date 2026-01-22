@@ -149,6 +149,8 @@ graph TD;
     Filehosting --> Langsame_Daten
 ```
 
+---
+
 Iot Geräte kann man schnell bauen, Kafka muss ich aufsetzten und dann C# von Confluent verwenden
 
 Insgesamt benötige ich:
@@ -172,31 +174,34 @@ Idee:
 - Download Clients and connect via API ( C# connectors )
     - EMQP Setup
     - Kafka Setup
+---
 
 # WORKFLOW GOALs
 Your workflow goal
 
-Simulation orchestrator
+## Simulation orchestrator
 
  - Reads “scenario” JSONs: light / medium / hard
 
  - Determines how many workers of each type to spawn
  
  - ipc to worker manager process to spawn new ones
- - - async while wait connection 
+  
+   - async while wait connection 
 
  - aggregeates log files after
 
-Producer Worker Manager Process
+## Producer Worker Manager Process
 
  - supports both ipc and each 5m. reading a .json config file
- - - updates worker config spawns
+
+   - updates worker config spawns
 
  - runtime logging of each worker to queue to write stuff down
 
  - async since consumer might get overwhelmed
 
-Consumer Worker Manager Process
+## Consumer Worker Manager Process
 
  - for MLServer and such
 
@@ -208,11 +213,11 @@ Consumer Worker Manager Process
 
  - anticipate manager crash
 
-Workers
+## Workers
 
  - execption handling, no manager crash
 
-Logger Queue Library
+## Logger Queue Library
 
  - library that gets attached hardcoded 
 
@@ -225,9 +230,11 @@ Logger Queue Library
  - log files need id and timestamps
 
 
+---
 
+# ChatGPT Stuff
 
-    Why separate processes shine for your CV/demo
+Why separate processes shine for your CV/demo
 1. Realistic topology
 
 Shows that you understand distributed systems

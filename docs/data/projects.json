@@ -1,6 +1,15 @@
 {
   "projects": [
     {
+      "id":"LowLatencyMarketDataPipeline",
+      "title":"Low Latency Market Data Pipeline",
+      "description":"A small low latency pipline to transfer signals.",
+      "file":"projects/low_latency_pipeline.md",
+      "github": "https://github.com/striker011/Projects/tree/main/source/Low_Latency_Market_Data_Pipeline",
+      "tech": ["C++", "C", "lockless Rinbuffer", "multithreading"],
+      "updated": "2026-01-22"
+    },
+    {
       "id":"network routing engineering project for google",
       "test":"https://www.google.com/about/careers/applications/jobs/results/105916160410559174-network-engineer-edge-network-operations"
 

@@ -1,0 +1,76 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "Low_Latency_Market_Data_Pipeline",
+					"jsonFile" : "directory-Low_Latency_Market_Data_Pipeline-Debug-8f6ef861eba31f5f22ba.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "Low_Latency_Market_Data_Pipeline",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "Low_Latency_Market_Data_Pipeline",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "Low_Latency_Market_Data_Pipeline::@1a5d19c5d5f00bda9413",
+					"jsonFile" : "target-Low_Latency_Market_Data_Pipeline-Debug-a1474b90fa074df63da9.json",
+					"name" : "Low_Latency_Market_Data_Pipeline",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "G:/Arbeit/CV_Projekte/Github/Projects/source/Low_Latency_Market_Data_Pipeline/out/build/x64-debug",
+		"source" : "G:/Arbeit/CV_Projekte/Github/Projects/source/Low_Latency_Market_Data_Pipeline"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 8
+	}
+}

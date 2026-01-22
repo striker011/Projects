@@ -43,12 +43,19 @@
     }
   ],
   "Projects":[
-        {
+    {
       "title" : "Kafka",
       "file"  : "../../source/kafka_simulation/kafka_simulation.md",
       "github": "source/website/project/kafka.md",
       "updated":"2025-01-05",
       "intro":"Test"
+    },
+    {
+      "title" : "Low Latency Pipeline",
+      "file" : "../../source/Low_Latency_Market_Data_Pipeline/LowLatencyMarketDataPipeline.md",
+      "github":"source/Low_Latency_Market_Data_Pipeline/LowLatencyMarketDataPipeline.md",
+      "updates":"2026-01-22",
+      "intro":"test"
     }
   ]
 }
