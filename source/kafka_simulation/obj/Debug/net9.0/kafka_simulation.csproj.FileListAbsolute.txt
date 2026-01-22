@@ -1,6 +1,0 @@
-G:\Arbeit\CV_Projekte\Github\Projects\source\kafka_simulation\obj\Debug\net9.0\kafka_simulation.csproj.AssemblyReference.cache
-G:\Arbeit\CV_Projekte\Github\Projects\source\kafka_simulation\obj\Debug\net9.0\kafka_simulation.GeneratedMSBuildEditorConfig.editorconfig
-G:\Arbeit\CV_Projekte\Github\Projects\source\kafka_simulation\obj\Debug\net9.0\kafka_simulation.AssemblyInfoInputs.cache
-G:\Arbeit\CV_Projekte\Github\Projects\source\kafka_simulation\obj\Debug\net9.0\kafka_simulation.AssemblyInfo.cs
-G:\Arbeit\CV_Projekte\Github\Projects\source\kafka_simulation\obj\Debug\net9.0\kafka_simulation.csproj.CoreCompileInputs.cache
-G:\Arbeit\CV_Projekte\Github\Projects\source\kafka_simulation\obj\Debug\net9.0\kafka_simulation.sourcelink.json
