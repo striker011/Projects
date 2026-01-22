@@ -144,9 +144,9 @@ async function loadPost(post, category) {
   var res;
 
   if(isLocalhost()){
-     res = await fetch(url);
-  }else{
     res = await fetch(post.file);
+  }else{
+    res = await fetch(url);
   }
 
   
