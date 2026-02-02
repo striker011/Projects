@@ -8,4 +8,5 @@
 #include <fstream>
 #include <string>
 #include <functional>
+#include <cstring>
 // TODO: Verweisen Sie hier auf zusätzliche Header, die Ihr Programm erfordert.

@@ -4,12 +4,17 @@
 #include "Low_Latency_Market_Data_Pipeline.h"
 
 static std::ostringstream captured;
-static std::streambuf* oldBuf = nullptr;
+static std::streambuf* oldBuf = NULL;
 
 using namespace std;
 
 struct signal {
 	int id;
+	float value;
+	int second;
+};
+
+struct signal_small {
 	float value;
 	int second;
 };
@@ -82,7 +87,7 @@ class RingBuffer {
 			}
 		}
 
-		string toString() {
+		void toString() {
 			cout << "WriteIndex = " << writeIndex << "---" << "ReadIndex = "<< readIndex<< endl;
 		}
 
@@ -95,7 +100,10 @@ class RingBuffer {
 
 class SignalRingBuffer {
 public:
-	static constexpr size_t CAPACITY = 128,ITEMSIZE= sizeof(signal);;
+
+	static constexpr size_t CAPACITY = 128;
+	signal buffer[CAPACITY];
+	int writeIndex, readIndex;
 
 	SignalRingBuffer() {
 		memset((void*)buffer, 0, CAPACITY);
@@ -127,16 +135,85 @@ public:
 	}
 
 private:
-	signal buffer[CAPACITY*ITEMSIZE];
+
+};
+
+class SignalRingBuffer_Overwrite {
+
+public:
+	static constexpr size_t CAPACITY = 128;
+	bool readerOverflowBehind;
+
+	SignalRingBuffer_Overwrite() {
+		memset((void*)buffer, 0, CAPACITY);
+		writeIndex = 0;
+		readIndex = 0;
+		cout << "SignalRingBuffer is active." << endl;
+		readerOverflowBehind = false;
+	}
+
+	int write(signal value) {
+		buffer[writeIndex] = value;
+		writeIndex = (writeIndex + 1) % CAPACITY;
+		return 1;
+	}
+
+	int read(signal*& ptr) {
+
+		ptr = &buffer[readIndex];
+		readIndex = (readIndex + 1) % CAPACITY;
+		return 1;
+	}
+
+private:
+	signal buffer[CAPACITY];
 	int writeIndex, readIndex;
 };
 
 class Sink {
 public:
+	SignalRingBuffer storage;
+	Sink() {
+		storage = SignalRingBuffer();
+	}
+
+	void write(signal &data){
+		storage.write(data);
+	}
+
+	void read(signal*& ptr) {
+		storage.read(ptr);
+	}
 
 private:
-
+	
 };
+
+class Producer {
+public:
+	Producer() {
+		generator = Generator();
+	}
+
+	const signal* produce() {
+		return generator.generateSignal();
+	}
+
+private:
+	Generator generator;
+};
+
+class Thread {
+public:
+	Thread() {
+
+	}
+	void newThread() {
+
+	}
+private:
+};
+
 
 class TestCase {
 public:
@@ -184,7 +261,7 @@ public:
 		Generator generator = Generator();
 
 		const signal* tmp;
-		signal* tmp2 = nullptr;
+		signal* tmp2 = NULL;
 
 		for (int i = 0; i < 5; i++) {
 
@@ -193,13 +270,55 @@ public:
 
 			signalringbuffer.read(tmp2);
 
-			if (tmp2 != nullptr) {
+			if (tmp2 != NULL) {
 				std::cout << "Wrote Signal: " << *tmp << "  and read Signal: " << *tmp2 << std::endl;
 			}
 			else {
 				std::cout << "[FAILURE] no value read" << std::endl;
 			}
 
+		}
+
+		return 1;
+	}
+
+	int TestCase_3() {
+		int noSignals = 130;
+
+		Producer producer = Producer();
+		Sink sink = Sink();
+
+		for (int i = 0; i < noSignals; i++) {
+			if (i > 125) {
+				std::cout << "";
+			}
+			const signal* ptr = producer.produce();
+			signal value = *ptr;
+			sink.write(value);
+			if (ptr == NULL) {
+				continue;
+			}
+			std::cout << "[WRITE] Signal: " << ptr->id << " " << ptr->second << " " << ptr->value << " |" << std::endl;
+		}
+
+		for (int i = 0; i < noSignals; i++) {
+			if (i > 125) {
+				std::cout << "";
+			}
+			signal* ptr = NULL;
+			sink.read(ptr);
+			if (ptr == NULL) {
+				continue;
+			}
+			std::cout << "[READ] Signal: " << ptr->id <<" "  << ptr->second << " " << ptr->value << " |" << std::endl;
+		}
+
+
+		for (int i = 0; i < sink.storage.CAPACITY; i++) {
+			if (i > 125) {
+				std::cout << "";
+			}
+			std::cout << sink.storage.buffer[i] << std::endl;
 		}
 
 		return 1;
@@ -305,6 +424,8 @@ int main()
 	TestCase testcase = TestCase();
 
 	testcase.RUN();
+
+	testcase.TestCase_3();
 
 
 
