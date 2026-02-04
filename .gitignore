@@ -9,6 +9,7 @@ test.txt
 
 source/Low_Latency_Market_Data_Pipeline/.vs/
 source/Low_Latency_Market_Data_Pipeline/out/
+source/Low_Latency_Market_Data_Pipeline/build/
 
 source/kafka_simulation/bin/
 source/kafka_simulation/obj/

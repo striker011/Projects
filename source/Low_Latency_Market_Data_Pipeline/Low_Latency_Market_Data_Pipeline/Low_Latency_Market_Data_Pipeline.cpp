@@ -101,8 +101,9 @@ class RingBuffer {
 class SignalRingBuffer {
 public:
 
-	static constexpr size_t CAPACITY = 128;
-	signal buffer[CAPACITY];
+	static constexpr size_t CAPACITY_TOTAL = 128;
+	static constexpr size_t CAPACITY = 127;
+	signal buffer[CAPACITY_TOTAL];
 	int writeIndex, readIndex;
 
 	SignalRingBuffer() {
@@ -212,13 +213,19 @@ public:
 
 	}
 private:
+
 };
 
 
 class TestCase {
 public:
-	const std::string BasePath = "G:\\Arbeit\\CV_Projekte\\Github\\Projects\\source\\Low_Latency_Market_Data_Pipeline\\TestCases\\";
+	std::string BasePath;
 	TestCase() {
+#if defined(WIN32)
+		BasePath = "..\\..\\..\\..\\TestCases\\";
+#elif	 defined(__linux__)
+		BasePath = "TestCases/";
+#endif
 	}
 
 	void RUN() {
@@ -226,6 +233,11 @@ public:
 		playTestCase(&TestCase::TestCase_2, "TestCase_2.txt");
 	}
 
+	void SAVE() {
+		saveTestCaseOutput(&TestCase::TestCase_2, "TestCase_1.txt");
+		saveTestCaseOutput(& TestCase::TestCase_2, "TestCase_2.txt");
+		saveTestCaseOutput(&TestCase::TestCase_2, "TestCase_3.txt");
+	}
 
 	int TestCase_1() {
 		int value = 10;
@@ -281,7 +293,6 @@ public:
 
 		return 1;
 	}
-
 	int TestCase_3() {
 		int noSignals = 130;
 
@@ -358,8 +369,47 @@ private:
 			return 0;
 		}
 	}
+	int saveTestCaseOutput(int (TestCase::* func)(), std::string  fileName) {
+		
+		captureConsoleOutput();
+		try {
+			(this->*func)();  // run the test
+		}
+		catch (const std::exception& e) {
+			releaseConsoleOutput();  // restore std::cout first
+			std::cerr << "[EXCEPTION] Test Case: " << fileName
+				<< " threw: " << e.what() << std::endl;
+			return -1;
+		}
+		catch (...) {
+			releaseConsoleOutput();
+			std::cerr << "[EXCEPTION] Test Case: " << fileName
+				<< " threw unknown exception" << std::endl;
+			return -1;
+		}
+		releaseConsoleOutput();
+
+		try {
+			std::cout << "Opening file: [" << BasePath + fileName << "]\n";
+			std::ofstream file(BasePath + fileName, std::ios::out | std::ios::trunc);
+			if (!file.is_open()) {
+				throw std::runtime_error("Datei konnte nicht geoeffnet werden: " +
+					BasePath);
+			}
+			else {
+				file << getCapturedOutput();
+				file.close();
+			}
+		}
+		catch (const std::exception& e) {
+			std::cerr << "[WARNING] Could not write TestCase output: " << e.what() << std::endl;
+			return 0;
+		}
+		return 1;
+	}
 	std::string loadExpectedOutput(std::string fileName){
 		try {
+			std::cout << "Opening file: [" << BasePath + fileName << "]\n";
 			std::ifstream file(BasePath + fileName);
 			if (!file) {
 				throw std::runtime_error(fileName + " konnte nicht geoeffnet werden");
@@ -407,27 +457,64 @@ private:
 	}
 };
 
+static int __system__() {
+#ifdef _WIN32
+	MEMORYSTATUSEX statex;
+	statex.dwLength = sizeof(statex);
+	GlobalMemoryStatusEx(&statex);
+
+	_tprintf(TEXT("There is  %*ld %% of memory in use.\n"),
+		WIDTH, statex.dwMemoryLoad);
+#endif
+
+#ifdef linux
+	char cmd[30];
+	int flag = 0;
+	FILE* fp;
+	char line[130];
+	int TotalMem, TotalFree, TotalUsed;
+
+	flag = 0;
+	memcpy(cmd, "\0", 30);
+	sprintf(cmd, "free -t -m|grep Total");
+	fp = popen(cmd, "r");
+	while (fgets(line, sizeof line, fp))
+	{
+		flag++;
+		sscanf(line, "%*s %d %d %d", &TotalMem, &TotalUsed, &TotalFree);
+	}
+	pclose(fp);
+
+	if (flag)
+		printf("TotalMem:%d -- TotalUsed:%d -- TotalFree:%d\n", TotalMem, TotalUsed, TotalFree);
+	else
+		printf("not found\n");
+#endif
+
+	return 0;
+}
+
 /*
 * normalizer oder so was bauen
 * sink bauen
 * threads einbauen
 * threadmanager einbauen
 */
-int main()
+int main(int argc, char* argv[])
 {
-	
 	cout << "Hello CMake." << endl;
-	
+	__system__();
+
 
 
 
 	TestCase testcase = TestCase();
 
-	testcase.RUN();
+	testcase.SAVE();
 
-	testcase.TestCase_3();
+	//testcase.TestCase_3();
 
-
+	//std::cout << std::filesystem::current_path() << "\n";
 
 	//testcase.TestCase_2();
 
