@@ -1,0 +1,52 @@
+﻿Pipeline:
+
+Programm entscheidet ob er Producer / Sink ist
+
+- Dann verarbeitet er so schnell wie möglich die Nachrichten (generieren+senden / empfangen+verarbeiten)
+
+
+Pipeline-Konzept (Textversion)
+
+Producer
+
+Pusht Signale in die Pipeline über pushSignal(signal).
+
+Produziert so schnell wie möglich, muss nicht warten.
+
+Signale können Rohzeiger oder besser std::shared_ptr<Signal> sein.
+
+Pipeline / Queue
+
+Thread-sicher: verwende std::queue + std::mutex + std::condition_variable.
+
+pushSignal() sperrt Mutex, legt Signal in Queue, weckt ggf. Sink-Thread (notify_one).
+
+popSignal() wartet (Condition Variable), bis ein Signal da ist, holt es in FIFO-Reihenfolge.
+
+Sink
+
+Holt Signale über popSignal().
+
+Verarbeitet sie in der Reihenfolge der IDs.
+
+Wenn nur ein Sink-Thread → Reihenfolge automatisch garantiert.
+
+Wenn mehrere Sink-Threads → ggf. zusätzliche Logik für Sequenznummern nötig, um Reihenfolge zu sichern.
+
+Speicherstrategie
+
+Producer → Pipeline: Thread-safe, beliebig viele Producer.
+
+Pipeline → Sink: FIFO-Queue, Reihenfolge garantiert.
+
+Sink kann unsicheren Container verwenden, da nur ein Thread darauf zugreift.
+
+Tipps für Implementierung
+
+Nutze std::shared_ptr<Signal> statt Rohzeiger, um Speicherlecks zu vermeiden.
+
+Producer-Threads rufen nur pushSignal().
+
+Sink-Threads rufen nur popSignal() und verarbeiten die Signale.
+
+Optional: ThreadPool für mehrere Producer oder Sinks, aber Reihenfolge nur bei Single-Sink einfach garantiert.

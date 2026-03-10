@@ -204,16 +204,49 @@ private:
 	Generator generator;
 };
 
+class Pipeline {
+	//nimmt signal von Producer entgegen
+	//sendet es weiter bzw. stellt es Sink irgendwie zur Verfügung
+	//Sink verarbeitet es
+	
+	//das heißt:
+	//irgendeine art von Speicher
+	//	1x thread sicher
+	//	1x thread unsicher
+	//stellt methoden, die an die threads übergeben werden können
+};
+
 class Thread {
 public:
 	Thread() {
-
+		thread_pool_index = 0;
+		pool_size = __hardware_concurrency_threads__;
+		thread_pool = new std::thread[pool_size];
 	}
-	void newThread() {
 
+	~Thread() {
+		for (int i = 0; i < thread_pool_index; i++) {
+			if (thread_pool[i].joinable()) {
+				thread_pool[i].join();
+			}
+		}
+		delete [] thread_pool;
+	}
+
+	template<typename Callable>
+	std::thread::id newThread(Callable&& func, char* arg[]) {
+		if (!(thread_pool_index < pool_size)) {
+			return std::thread::id;
+		}
+
+		thread_pool[thread_pool_index] = std::thread(func,arg);
+		thread_pool_index++;
+		return thread_pool[thread_pool_index-1].get_id();
 	}
 private:
-
+	int pool_size;
+	std::thread* thread_pool;
+	int thread_pool_index;
 };
 
 
@@ -234,9 +267,9 @@ public:
 	}
 
 	void SAVE() {
-		saveTestCaseOutput(&TestCase::TestCase_2, "TestCase_1.txt");
+		saveTestCaseOutput(&TestCase::TestCase_1,"TestCase_1.txt");
 		saveTestCaseOutput(& TestCase::TestCase_2, "TestCase_2.txt");
-		saveTestCaseOutput(&TestCase::TestCase_2, "TestCase_3.txt");
+		saveTestCaseOutput(&TestCase::TestCase_3, "TestCase_3.txt");
 	}
 
 	int TestCase_1() {
@@ -333,6 +366,11 @@ public:
 		}
 
 		return 1;
+	}
+	int TestCase_4(){
+	
+
+
 	}
 
 private:
@@ -510,7 +548,8 @@ int main(int argc, char* argv[])
 
 	TestCase testcase = TestCase();
 
-	testcase.SAVE();
+
+	//testcase.SAVE(); //geht
 
 	//testcase.TestCase_3();
 

@@ -25,4 +25,8 @@
 #include <functional>
 #include <cstring>
 #include <filesystem>
+#include <thread>
+
+static const unsigned int __hardware_concurrency_threads__ = std::thread::hardware_concurrency();
+
 // TODO: Verweisen Sie hier auf zusätzliche Header, die Ihr Programm erfordert.
