@@ -61,10 +61,17 @@ print("\ntechStack.json aktualisiert.")
 # -------------------------------
 os.makedirs(source_path, exist_ok=True)
 
+# Benutzer nach Dateiname fragen
+readme_name = input("Wie soll die Readme-Datei heißen (z. B. Readme.md)? ").strip()
+if not readme_name:
+    readme_name = "Dummy.md"  # Default, falls leer
+
+readme_path = os.path.join(source_path, readme_name)
+
 with open(readme_path, "w") as f:
     f.write(f"# {title}\n\n{description}")
 
-print(f"Ordner + Readme erstellt: {source_path}")
+print(f"Ordner + Readme erstellt: {readme_path}")
 
 # -------------------------------
 # 7️⃣ projects.json aktualisieren
