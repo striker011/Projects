@@ -4,22 +4,19 @@
       "title" : "Kafka",
       "file"  : "../../source/kafka_simulation/kafka_simulation.md",
       "github": "kafka_simulation/kafka_simulation.md",
-      "updated":"2025-11-05",
-      "intro":"Kleine Demonstration meiner Bachelorarbeit"
+      "updated":"2025-11-05"
     },
     {
       "title" : "Low Latency Pipeline",
       "file" : "../../source/Low_Latency_Market_Data_Pipeline/LowLatencyMarketDataPipeline.md",
       "github":"Low_Latency_Market_Data_Pipeline/LowLatencyMarketDataPipeline.md",
-      "updated":"2026-01-22",
-      "intro":"Übersicht über meine Low Latency Pipeline"
+      "updated":"2026-01-22"
     },
     {
       "title" : "ML Basics",
       "file": "../posts/ai/ml_basics.md",
       "github":"ml_basics.md",
-      "updated" :"2026-02-04",
-      "intro":"Intro in Machine Learning Modelle"
+      "updated" :"2026-02-04"
     }
   ]
 }
