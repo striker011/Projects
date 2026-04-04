@@ -1,74 +1,108 @@
 {
   "projects": [
     {
-      "id":"LowLatencyMarketDataPipeline",
-      "title":"Low Latency Market Data Pipeline",
-      "description":"A small low latency pipline to transfer signals.",
+      "id": "LowLatencyMarketDataPipeline",
+      "title": "Low Latency Market Data Pipeline",
+      "description": "A small low latency pipline to transfer signals.",
       "github": "https://github.com/striker011/Projects/tree/main/source/Low_Latency_Market_Data_Pipeline",
-      "tech": ["C++", "C", "lockless Ringbuffer", "multithreading"],
+      "tech": [
+        "C++",
+        "C",
+        "lockless Ringbuffer",
+        "multithreading"
+      ],
       "updated": "2026-01-22"
     },
     {
-      "id":"network routing engineering project for google",
-      "test":"https://www.google.com/about/careers/applications/jobs/results/105916160410559174-network-engineer-edge-network-operations"
-
+      "id": "network routing engineering project for google",
+      "test": "https://www.google.com/about/careers/applications/jobs/results/105916160410559174-network-engineer-edge-network-operations"
     },
     {
-    "id": "High-Performance Systems",
-    "keywords": ["C++", "C", "multithreading", "key-value store", "allocator", "flamegraphs", "time complexity"]
-
+      "id": "High-Performance Systems",
+      "keywords": [
+        "C++",
+        "C",
+        "multithreading",
+        "key-value store",
+        "allocator",
+        "flamegraphs",
+        "time complexity"
+      ]
     },
     {
       "id": "Quant Trading Stack",
-      "keywords": ["order book matcher", "backtester", "portfolio optimizer", "signal math", "probability", "optimization"]
+      "keywords": [
+        "order book matcher",
+        "backtester",
+        "portfolio optimizer",
+        "signal math",
+        "probability",
+        "optimization"
+      ]
     },
     {
       "id": "Data & Pipelines",
-      "keywords": ["market data scraper", "analysis pipeline", "scalable code"]
-
+      "keywords": [
+        "market data scraper",
+        "analysis pipeline",
+        "scalable code"
+      ]
     },
     {
-      "id":"Quant Dev, System Programming Project zur Darstellung, c/c++  highspeed keyvalue, multithreaded client server, task runner, monte carlo sim, mem allocator",
-      "more":"backtesting engines, optimizing pipelines, implementation of signal math model,linear algebra, probebility statistics, optimization",
-      "test":"scalable code",
-      "good":"real work,personal project,internship,opensource work",
-      "maps":"hashmaps,graphs,trees,time complex,",
-      "tst":"system oriented thinking",
-      "speed":"flamegraphs,cpu cycles, time complex",
-      "project":"tradeing sim,order book matcher, portfolio optimizer,analysis pipelin,backtester,trade exc sim,market data scraper"
-
+      "id": "Quant Dev, System Programming Project zur Darstellung, c/c++  highspeed keyvalue, multithreaded client server, task runner, monte carlo sim, mem allocator",
+      "more": "backtesting engines, optimizing pipelines, implementation of signal math model,linear algebra, probebility statistics, optimization",
+      "test": "scalable code",
+      "good": "real work,personal project,internship,opensource work",
+      "maps": "hashmaps,graphs,trees,time complex,",
+      "tst": "system oriented thinking",
+      "speed": "flamegraphs,cpu cycles, time complex",
+      "project": "tradeing sim,order book matcher, portfolio optimizer,analysis pipelin,backtester,trade exc sim,market data scraper"
     },
-    { 
+    {
       "id": "Webseite modernisieren",
-      "stack": ["Angular", "TypeScript"],
-      "goal": "Portfolio / Dev-Blog" 
-
+      "stack": [
+        "Angular",
+        "TypeScript"
+      ],
+      "goal": "Portfolio / Dev-Blog"
     },
     {
       "id": "kafka_simulation",
       "title": "Kafka Simulation & Benchmarking",
       "description": "Experimentelle Simulation und Evaluierung von Kafka-Konfigurationen basierend auf meiner Bachelorarbeit.",
-
       "github": "https://github.com/striker011/Projects/tree/main/source/kafka_simulation",
-      "tech": ["C#", "Kafka", "Distributed Systems", "Simulation"],
+      "tech": [
+        "C#",
+        "Kafka",
+        "Distributed Systems",
+        "Simulation"
+      ],
       "updated": "2025-01-12"
     },
     {
       "id": "financemanager",
       "title": "Finance Manager App",
       "description": "Mobile App in .NET MAUI mit SQLite, Budgetverwaltung, Transaktionen, Kategorien und automatischen Statistiken.",
-
       "github": "https://github.com/striker011/Projects/tree/main/source/website/projects/finance_manager",
-      "stech": [".NET MAUI", "C#", "SQLite", "MVVM"],
+      "stech": [
+        ".NET MAUI",
+        "C#",
+        "SQLite",
+        "MVVM"
+      ],
       "updated": "2024-12-20"
     },
     {
       "id": "assetcreator",
       "title": "AssetCreator Tool",
-      "description": "C# Tool zur XML-Generierung dynamischer Objekte und Templates mit Reflection / Editor Oberfläche.",
-
+      "description": "C# Tool zur XML-Generierung dynamischer Objekte und Templates mit Reflection / Editor Oberfl\u00c3\u00a4che.",
       "github": "https://github.com/striker011/Projects/tree/main/source/website/projects/asset_creator",
-      "stech": ["C#", "Reflection", "XML", "UI Toolkit"],
+      "stech": [
+        "C#",
+        "Reflection",
+        "XML",
+        "UI Toolkit"
+      ],
       "updated": "2024-11-10"
     }
   ]

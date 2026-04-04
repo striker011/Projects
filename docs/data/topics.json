@@ -1,22 +1,22 @@
-{ 
-  "Projects":[
+{
+  "Projects": [
     {
-      "title" : "Kafka",
-      "file"  : "../../source/kafka_simulation/kafka_simulation.md",
+      "title": "Kafka",
+      "file": "../../source/kafka_simulation/kafka_simulation.md",
       "github": "kafka_simulation/kafka_simulation.md",
-      "updated":"2025-11-05"
+      "updated": "2025-11-05"
     },
     {
-      "title" : "Low Latency Pipeline",
-      "file" : "../../source/Low_Latency_Market_Data_Pipeline/LowLatencyMarketDataPipeline.md",
-      "github":"Low_Latency_Market_Data_Pipeline/LowLatencyMarketDataPipeline.md",
-      "updated":"2026-01-22"
+      "title": "Low Latency Pipeline",
+      "file": "../../source/Low_Latency_Market_Data_Pipeline/LowLatencyMarketDataPipeline.md",
+      "github": "Low_Latency_Market_Data_Pipeline/LowLatencyMarketDataPipeline.md",
+      "updated": "2026-01-22"
     },
     {
-      "title" : "ML Basics",
+      "title": "ML Basics",
       "file": "../posts/ai/ml_basics.md",
-      "github":"ml_basics.md",
-      "updated" :"2026-02-04"
+      "github": "ml_basics.md",
+      "updated": "2026-02-04"
     }
   ]
 }

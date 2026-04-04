@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Portfolio Manager</title>
-    <link rel="stylesheet" href="../css/backend_newEntry.css" />
+    <link rel="stylesheet" href="../css/backend_newEntryS.css" />
     <script src="../js/backend_newEntry.js"></script>
 </head>
 <body>
@@ -146,34 +146,39 @@
 
 
 
-<h1>Neues Projekt</h1>
+<h1>Neues Projekt erstellen</h1>
+
+<!-- ===================== -->
+<!-- projects.json -->
+<!-- ===================== -->
+
+<h2>projects.json</h2>
 
 <form>
 
-    <label for="id">ID:</label><br>
-    <input type="text" id="id" name="id"><br><br>
+    <label>ID:</label><br>
+    <input type="text" name="id"><br><br>
 
-    <label for="title">Titel:</label><br>
-    <input type="text" id="title" name="title"><br><br>
+    <label>Titel:</label><br>
+    <input type="text" name="title"><br><br>
 
-    <label for="description">Beschreibung:</label><br>
-    <textarea id="description" name="description"></textarea><br><br>
+    <label>Beschreibung:</label><br>
+    <textarea name="description"></textarea><br><br>
 
-    <label for="file">Markdown Datei:</label><br>
-    <input type="text" id="file" name="file" placeholder="projects/xyz.md"><br><br>
+    <label>Ordner Name</label><br>
+    <input type="text" name="github"><br><br>
 
-    <label for="github">GitHub Link:</label><br>
-    <input type="text" id="github" name="github"><br><br>
+    <label>Tech Stack (kommagetrennt):</label><br>
+    <input type="text" name="tech"><br><br>
 
-    <label for="tech">Tech Stack (kommagetrennt):</label><br>
-    <input type="text" id="tech" name="tech"><br><br>
-
-    <label for="updated">Updated:</label><br>
-    <input type="date" id="updated" name="updated"><br><br>
+    <label>Updated:</label><br>
+    <input type="date" name="updated"><br><br>
 
     <button type="submit">Projekt speichern</button>
 
 </form>
+
+
 
 
 <h1>Neuer Blog Post</h1>
@@ -191,9 +196,6 @@
 
     <label for="updated">Updated:</label><br>
     <input type="date" id="updated" name="updated"><br><br>
-
-    <label for="intro">Intro:</label><br>
-    <textarea id="intro" name="intro"></textarea><br><br>
 
     <button type="submit">Post speichern</button>
 
@@ -215,7 +217,7 @@ Bsp.:
       "id":"LowLatencyMarketDataPipeline",
       "title":"Low Latency Market Data Pipeline",
       "description":"A small low latency pipline to transfer signals.",
-      "file":"projects/low_latency_pipeline.md",
+      "file":"projects/low_latency_pipeline.md",    
       "github": "https://github.com/striker011/Projects/tree/main/source/Low_Latency_Market_Data_Pipeline",
       "tech": ["C++", "C", "lockless Ringbuffer", "multithreading"],
       "updated": "2026-01-22"
