@@ -1,6 +1,13 @@
 {
   "Projects": [
     {
+      "title": "HighspeedServer",
+      "file": "../../source/highspeed_io_server/HighspeedServer.md",
+      "github": "highspeed_io_server/HighspeedServer.md",
+      "updated": "2026-04-04",
+      "intro": "Intro hier..."
+    },
+    {
       "title": "Kafka",
       "file": "../../source/kafka_simulation/kafka_simulation.md",
       "github": "kafka_simulation/kafka_simulation.md",

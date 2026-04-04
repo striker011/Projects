@@ -1,6 +1,20 @@
 {
   "projects": [
     {
+      "id": "HighspeedIOServer",
+      "title": "Highspeed IO Server",
+      "description": "Nachbau eines Highspeed I/O Server aus dem Studium",
+      "github": "https://github.com/striker011/Projects/tree/main/source/highspeed_io_server",
+      "tech": [
+        "C",
+        "C++",
+        "multithreading",
+        "Distributed Systems",
+        "Networking protocols"
+      ],
+      "updated": "2026-04-04"
+    },
+    {
       "id": "LowLatencyMarketDataPipeline",
       "title": "Low Latency Market Data Pipeline",
       "description": "A small low latency pipline to transfer signals.",
