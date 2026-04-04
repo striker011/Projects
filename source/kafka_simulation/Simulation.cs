@@ -36,6 +36,8 @@ public class Simulation
             //Load the PayloadType into them 
             //Provide CancelToken
             //Start Loop
+
+            
         }
     }
     
@@ -51,6 +53,6 @@ public class SimulationLogger
 
     SimulationLogger()
     {
-        //faggot
+        //lorem ipsum
     }
 }

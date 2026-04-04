@@ -2,8 +2,6 @@
 
 ## Basiert auf meiner Abschlussarbeit
 
-# Keine Ahnung woran ich bin
-
 ### Übersicht
 
 **Alter Aufbau**
