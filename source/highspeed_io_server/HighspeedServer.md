@@ -102,3 +102,11 @@ Kommunikation via:
 UDP / TCP zwischen Prozessen
 Shared Memory
 Vorteil: klare Trennung, leichter zu testen
+
+
+Stufe 1-3: Alles in Python → Prototyp + Logging + Traffic Split Simulation
+Stufe 4:
+Performance-kritische Module nach und nach in C oder Cython
+Python ruft diese Module auf, übernimmt Logging, KPI, Health Checks
+Vorteil: du musst nicht alles auf einmal in C neu schreiben
+Optional: Später können einzelne Module als eigenständige Low-Latency Services laufen (Microservice-Ansatz)
