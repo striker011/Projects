@@ -34,13 +34,14 @@ Producer/Consumer Pattern -> Lockless Queue
 
 # Stufe 1 – Server Setup & Request Handling
 UDP Connection Handler (done)
-Request Parser (trenne Netzwerk von Logik)
-Response Logic / Business Logic
-Response Sender
+Request Parser (trenne Netzwerk von Logik) (done)
+Response Logic / Business Logic (done ?)
+Response Sender (done)
+Logging (done)
 Logging erweitern:
-Request-Timestamps
-Response-Latenz
-KPI: Request Count, einfache Latenz
+Request-Timestamps(done)
+Response-Latenz(done)
+KPI: Request Count, einfache Latenz(done)
 
 # Stufe 2 – Versionierung / Traffic Splitting
 Simuliere mehrere Server-Versionen (v1, v2, optional v3)
