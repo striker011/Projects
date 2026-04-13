@@ -1,4 +1,5 @@
 from updConnection import myUDP
+from ioProtocol import ioPacket
 
 def main():
     print("Enter port")
@@ -11,7 +12,12 @@ def main():
 
     udp.create_socket()
 
-    udp.sendData("Hallo Welt",ip,5005)
+    operation = 2
+    data="Hello World"
+
+    msg = ioPacket.encode_data(operation,data)
+
+    udp.sendData(msg,ip,5005)
 
     udp.close_socket()
 

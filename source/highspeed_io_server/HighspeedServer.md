@@ -33,7 +33,7 @@ Producer/Consumer Pattern -> Lockless Queue
 # Projektverlauf
 
 # Stufe 1 – Server Setup & Request Handling
-UDP Connection Handler
+UDP Connection Handler (done)
 Request Parser (trenne Netzwerk von Logik)
 Response Logic / Business Logic
 Response Sender
