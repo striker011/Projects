@@ -24,3 +24,6 @@ class myUDP:
             self.sock.close()
         except Exception as e:
             print("Error closing socket:", e)
+        
+    def getStandartConnection():
+        return "127.0.0.1", 5005
