@@ -56,8 +56,8 @@ class versioner:
                 print("No servers available")
                 continue
             newestServerPacket = self.serverList[-1]
-            print(f"Forwarding to {newnewestServerPacket.serverIP}:{newestServerPacket.serverPORT}")
-            self.myUDPSocketUDP.sock.sendto(data,(newestServerPacket.serverIP,newestServerPacket.serverPORT))
+            print(f"Forwarding to {newestServerPacket.serverIP}:{newestServerPacket.serverPORT}")
+            self.myUDPSocket.sock.sendto(data,(newestServerPacket.serverIP,newestServerPacket.serverPORT))
         
 
     def listen_for_server_registration(self):
