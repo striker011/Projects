@@ -1,5 +1,6 @@
 from updConnection import myUDP
 import threading
+from debug import Debug
 
 class version_protocol:
     @staticmethod
@@ -9,6 +10,35 @@ class version_protocol:
     @staticmethod
     def build_DeRegisterPacket(ip,port):
         return f"DEREGISTER<{ip}><{int(port)}>"
+
+    @staticmethod
+    def build_DataPacket(clientIP,clientPORT,clientPayload):
+        return f"<{clientIP}>|<{clientPORT}>|<{clientPayload}>"
+
+    @staticmethod
+    def decode_DataPacket(packet, debug=False):
+        try:
+            if isinstance(packet, bytes):
+                packet = packet.decode() 
+
+            if debug:
+                Debug.log("packet",packet)
+                Debug.log(type(packet), "packet_type")
+            
+            parts = packet.split("|", 2)
+            if debug:
+                Debug.log("parts",parts)
+                Debug.log(type(parts), "parts_type")
+
+            clientIP = parts[0].replace("<", "").replace(">", "")
+            clientPORT = int(parts[1].replace("<", "").replace(">", ""))
+            clientPayload = parts[2].replace("<", "").replace(">", "")
+
+            return clientIP, clientPORT, clientPayload
+        except Exception as e:
+            print("Fehler beim Decodieren des DataPackets:", e)
+            return None, None, None
+
 
 
 class version_packet:
@@ -55,10 +85,24 @@ class versioner:
             if len(self.serverList) == 0:
                 print("No servers available")
                 continue
+
             newestServerPacket = self.serverList[-1]
+
+            clientIP, clientPORT = addr
+
+            payload = data.decode()
+
+            packet = version_protocol.build_DataPacket(
+                clientIP,
+                clientPORT,
+                payload
+            )
+
             print(f"Forwarding to {newestServerPacket.serverIP}:{newestServerPacket.serverPORT}")
-            self.myUDPSocket.sock.sendto(data,(newestServerPacket.serverIP,newestServerPacket.serverPORT))
-        
+            self.myUDPSocket.sock.sendto(
+                packet.encode(),
+                (newestServerPacket.serverIP, newestServerPacket.serverPORT)
+            )
 
     def listen_for_server_registration(self):
         while self.loopBreak:

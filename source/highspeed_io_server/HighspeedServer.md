@@ -47,6 +47,8 @@ KPI: Request Count, einfache Latenz(done)
 Simuliere mehrere Server-Versionen (v1, v2, optional v3) (steht aber BUG: ECHO LOOP, keine Unterscheidung von CLient oder Server MSG, geht alles an Server, UDP receive hat buf_size limit)
     C/C++ IP Spoofing - not debuggable, nicht für Stufe 2. Alternativ : 
     <client_ip>|<client_port>|<payload> vom Versionierer senden und beim Server decoden
+        Version Control  - Done
+        Server  - gemacht aber es gibt eine Null oder Non Repsonse beim empfangen von client data
 Entry-Server entscheidet, welche Version bedient:
 Round-Robin oder Prozentuale Verteilung
 Logging pro Version:
