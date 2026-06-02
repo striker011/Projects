@@ -1,26 +1,26 @@
 from datetime import datetime
+
 class ioPacket:
+
+    SEP = "\x1f"  # Unit Separator (sehr sicher)
 
     @staticmethod
     def encode_data(operation, data):
-        return f"{operation}<{data}><{datetime.now()}>"
+        timestamp = datetime.now().isoformat()
+        return f"{operation}{ioPacket.SEP}{data}{ioPacket.SEP}{timestamp}"
 
     @staticmethod
     def decode_data(packet):
         try:
-            operation = packet[0]
+            if isinstance(packet, bytes):
+                packet = packet.decode()
 
-            # erstes Feld (data)
-            first_start = packet.find("<") + 1
-            first_end = packet.find(">")
+            parts = packet.split(ioPacket.SEP)
 
-            data = packet[first_start:first_end]
+            if len(parts) != 3:
+                raise ValueError(f"Invalid packet format: {parts}")
 
-            # zweites Feld (timestamp)
-            second_start = packet.find("<", first_end) + 1
-            second_end = packet.find(">", first_end + 1)
-
-            timestamp = packet[second_start:second_end]
+            operation, data, timestamp = parts
 
             return operation, data, timestamp
 
@@ -30,4 +30,8 @@ class ioPacket:
 
     @staticmethod
     def operation_types():
-        print("0 - Write; 1 - Read, 2 - Info")
+        return {
+            0: "Write",
+            1: "Read",
+            2: "Info"
+        }

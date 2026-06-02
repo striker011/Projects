@@ -49,7 +49,10 @@ Simuliere mehrere Server-Versionen (v1, v2, optional v3) (steht aber BUG: ECHO L
     <client_ip>|<client_port>|<payload> vom Versionierer senden und beim Server decoden
         Version Control  - Done
         Server  - gemacht aber es gibt eine Null oder Non Repsonse beim empfangen von client data
+            gelöst, war ein byte, str problem in der version-contorl
 Entry-Server entscheidet, welche Version bedient:
+    ConnectionResetError: [WinError 10054] Eine vorhandene Verbindung wurde vom Remotehost geschlossen
+    kann gesendet werden aber server stirbt nach erhalt einer nachricht
 Round-Robin oder Prozentuale Verteilung
 Logging pro Version:
 Anzahl Requests
