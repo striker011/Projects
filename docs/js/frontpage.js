@@ -62,17 +62,24 @@ async function loadLatestThreeProjects(){
     const card = document.createElement("div");
     card.className = "project-card";
     
-
     card.innerHTML = `
       <h3>${proj.title}</h3>
       <p>${proj.description}</p>
-
+      
 
       <div class="project-actions">
         <button type="button" class="btn-small" onclick="openProject('${proj.id}')">Read More</button>
         <a href="${proj.github}" target="_blank" class="btn-small" >GitHub ↗</a>
       </div>
+
     `;
+
+    proj.tech.forEach(technologie=>{
+        const span = document.createElement("span");
+        span.className="badgeInvertedColor";
+        span.textContent=technologie;
+        card.appendChild(span)
+    })
 
     projectGrid.appendChild(card);
   });
