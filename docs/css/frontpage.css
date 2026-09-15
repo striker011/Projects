@@ -110,6 +110,17 @@
     justify-content: space-between;
 }
 
+.project-badge{
+    display: inline-block;
+    background: #ffffff;
+    padding: 4px 8px;
+    border-radius: 6px;
+    margin-right: 6px;
+    margin-top: 6px;
+    font-size: 0.75rem;
+    color:#09110e;
+}
+
 .btn-small {
     background: #111a0a;
     color: white;

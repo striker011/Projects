@@ -63,10 +63,12 @@ async function loadLatestThreeProjects(){
     card.className = "project-card";
     
 
+    const techBadges = proj.tech.map(tec => `<span class="project-badge">${tec}</span>`).join("");
+
     card.innerHTML = `
       <h3>${proj.title}</h3>
       <p>${proj.description}</p>
-
+      <p>${techBadges}</p>
 
       <div class="project-actions">
         <button type="button" class="btn-small" onclick="openProject('${proj.id}')">Read More</button>
