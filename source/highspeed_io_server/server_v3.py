@@ -94,6 +94,34 @@ class backend_server:
         except Exception as e:
             return f"ERROR|{e}"
 
+    
+    # ----------------------------
+    #  NETWORK
+    # ----------------------------
+
+    # ----------------------------
+    # 🌐 NETWORK INTERFACE
+    # ----------------------------
+
+    def _NETWORK_GET(self, debug=True):
+        return None
+
+    def _NETWORK_SEND(self, data, addr, debug=True):
+        return None
+    
+    def _NETWORK_REGISTER(self, debug=True):
+        return None
+
+    def _NETWORK_DEREGISTER(self, debug=True):
+        return None
+
+    # 🌐 IP SPOOFING
+
+    def _NETWORK_IP_SPOOFING(self, ip, debug=True):
+        return None
+
+    
+
     # ----------------------------
     # 🔁 MAIN LOOP
     # ----------------------------
@@ -114,7 +142,7 @@ class backend_server:
 
                 addr = (clientIP, clientPORT)
                 response = self.handle_packet(io_payload, addr)
-
+                
                 if response:
                     if debug:
                         Debug.log(type(response), "response_type")

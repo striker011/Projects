@@ -19,6 +19,12 @@ def main():
 
     udp.sendData(msg,ip,5005)
 
+    # if this is missing, the server crashes
+    #if the server doesn't send a response, this will block indefinitely
+    data, address = udp.receiveData()
+    print("Received data: {} from {}".format(data, address))
+
+
     udp.close_socket()
 
 if __name__ == "__main__":

@@ -45,20 +45,31 @@ KPI: Request Count, einfache Latenz(done)
 
 # Stufe 2 – Versionierung / Traffic Splitting
 Simuliere mehrere Server-Versionen (v1, v2, optional v3) (steht aber BUG: ECHO LOOP, keine Unterscheidung von CLient oder Server MSG, geht alles an Server, UDP receive hat buf_size limit)
+
     C/C++ IP Spoofing - not debuggable, nicht für Stufe 2. Alternativ : 
     <client_ip>|<client_port>|<payload> vom Versionierer senden und beim Server decoden
         Version Control  - Done
         Server  - gemacht aber es gibt eine Null oder Non Repsonse beim empfangen von client data
-            gelöst, war ein byte, str problem in der version-contorl
+            - gelöst, war ein byte, str problem in der version-contorl
+        versuchen vom server aus die ip des verteiles zu senden []
+
 Entry-Server entscheidet, welche Version bedient:
     ConnectionResetError: [WinError 10054] Eine vorhandene Verbindung wurde vom Remotehost geschlossen
     kann gesendet werden aber server stirbt nach erhalt einer nachricht
+    - gelöst, client muss recvData haben, dann geht es
 Round-Robin oder Prozentuale Verteilung
 Logging pro Version:
 Anzahl Requests
 Latenz pro Version
 KPI: Traffic-Verteilung sichtbar machen
 Optional: Canary Releases simulieren (z.B. v2 nur 20% Traffic)
+
+--
+
+modules Aufarbeiten des Codes, für leichter verständliche Ablaufkontrolle
+
+--
+
 
 # Stufe 3 – Load Balancer / Multi-Node Awareness
 Entry-Server verteilt Requests auf mehrere Backend-Knoten
@@ -118,3 +129,9 @@ Performance-kritische Module nach und nach in C oder Cython
 Python ruft diese Module auf, übernimmt Logging, KPI, Health Checks
 Vorteil: du musst nicht alles auf einmal in C neu schreiben
 Optional: Später können einzelne Module als eigenständige Low-Latency Services laufen (Microservice-Ansatz)
+
+
+# Bug-Liste
+
+1. Wenn Client / Server kein .recvData haben, bricht entweder der Server ab oder der Client hängt unendlich. Warum ?
+Client schließt sich und Windows meldet einen Fehler. Der Server fängt diesen nicht ab. Beim Client gibt es kein Timeout und deswegen blockiert er unendlich

@@ -16,3 +16,5 @@ source/kafka_simulation/obj/
 
 source/kafka_simulation/MicroService/bin/
 source/kafka_simulation/MicroService/obj/
+
+master/
