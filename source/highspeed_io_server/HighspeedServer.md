@@ -57,12 +57,7 @@ Entry-Server entscheidet, welche Version bedient:
     ConnectionResetError: [WinError 10054] Eine vorhandene Verbindung wurde vom Remotehost geschlossen
     kann gesendet werden aber server stirbt nach erhalt einer nachricht
     - gelöst, client muss recvData haben, dann geht es
-Round-Robin oder Prozentuale Verteilung
-Logging pro Version:
-Anzahl Requests
-Latenz pro Version
-KPI: Traffic-Verteilung sichtbar machen
-Optional: Canary Releases simulieren (z.B. v2 nur 20% Traffic)
+
 
 --
 
@@ -74,7 +69,7 @@ modules Aufarbeiten des Codes, für leichter verständliche Ablaufkontrolle
 # Stufe 3 – Load Balancer / Multi-Node Awareness
 Entry-Server verteilt Requests auf mehrere Backend-Knoten
 Load Balancing Algorithmus:
-Round-Robin oder Random
+Round-Robin oder Random DONE
 Optional: Gewichtung nach Server-Performance
 Logging / KPIs pro Backend-Knoten:
 Anzahl Requests
