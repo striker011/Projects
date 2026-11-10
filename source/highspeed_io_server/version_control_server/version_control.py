@@ -71,6 +71,9 @@ class versioner:
                 (newestServerIP, newestServerPORT)
             )
 
+            #test
+            print(f"Rerouted data from {clientIP}:{clientPORT} to {newestServerIP}:{newestServerPORT}")
+
     def listen_for_server_registration(self):
         while self.loopBreak:
             data, addr = self.myUDPSocketRegistration.receiveData()
