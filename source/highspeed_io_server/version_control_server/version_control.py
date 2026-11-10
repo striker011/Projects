@@ -1,55 +1,10 @@
-from updConnection import myUDP
 import threading
-from debug import Debug
+from highspeed_io_server.network.updConnection import myUDP
+from highspeed_io_server.version_control_server.version_protocol import version_protocol
+from highspeed_io_server.version_control_server.version_packet import version_packet
+from highspeed_io_server.version_control_server.load_balancer import load_balancer
 
-class version_protocol:
-    @staticmethod
-    def build_RegisterPacket(ip,port):
-        return f"REGISTER<{ip}><{int(port)}>"
-    
-    @staticmethod
-    def build_DeRegisterPacket(ip,port):
-        return f"DEREGISTER<{ip}><{int(port)}>"
-
-    @staticmethod
-    def build_DataPacket(clientIP,clientPORT,clientPayload):
-        return f"<{clientIP}>|<{clientPORT}>|<{clientPayload}>"
-
-    @staticmethod
-    def decode_DataPacket(packet, debug=False):
-        try:
-            if isinstance(packet, bytes):
-                packet = packet.decode() 
-
-            if debug:
-                Debug.log("packet",packet)
-                Debug.log(type(packet), "packet_type")
-            
-            parts = packet.split("|", 2)
-            if debug:
-                Debug.log("parts",parts)
-                Debug.log(type(parts), "parts_type")
-
-            clientIP = parts[0].replace("<", "").replace(">", "")
-            clientPORT = int(parts[1].replace("<", "").replace(">", ""))
-            clientPayload = parts[2].replace("<", "").replace(">", "")
-
-            return clientIP, clientPORT, clientPayload
-        except Exception as e:
-            print("Fehler beim Decodieren des DataPackets:", e)
-            return None, None, None
-
-
-
-class version_packet:
-    def __init__(self,ip,port):
-        self.serverIP = ip
-        self.serverPORT = port
-    
-    def getInfo(self):
-        return self.serverIP, self.serverPORT
-
-class versioner: 
+class versioner:    
     def __init__(self,ip,port):
         self.myIP = ip
         self.myPort = port
@@ -63,15 +18,19 @@ class versioner:
         self.serverThreadPool = []
         self.loopBreak = True
 
+        self.loadBalancer = load_balancer(load_balancer.STRATEGY_ROUND_ROBIN)  # Initialize the load balancer
+
     def register_server(self,serverIP,serverPORT):
             packet = version_packet(serverIP,serverPORT)
             self.serverList.append(packet)
+            self.loadBalancer.add_server(serverIP, serverPORT)
             print(f"Registered server: {serverIP}:{serverPORT}")
     
     def deregister_server(self,serverIP,serverPORT):
         for packet in self.serverList:
             if (packet.serverIP == serverIP and packet.serverPORT == serverPORT):
                 self.serverList.remove(packet)
+                self.loadBalancer.remove_server(serverIP, serverPORT)
                 print(f"Deregistered server: {serverIP}:{serverPORT}")
                 break
 
@@ -82,14 +41,22 @@ class versioner:
     def listen_and_reroute(self):
         while self.loopBreak:
             data, addr = self.myUDPSocket.receiveData()
+            if data is None or addr is None:
+                continue
+
             if len(self.serverList) == 0:
                 print("No servers available")
                 continue
 
-            newestServerPacket = self.serverList[-1]
+            server = self.loadBalancer.get_next_server()
+            if server is None:
+                print("No servers available in load balancer")
+                continue
 
+            newestServerPacket = server
+            newestServerIP = newestServerPacket.getIP()
+            newestServerPORT = newestServerPacket.getPORT()
             clientIP, clientPORT = addr
-
             payload = data.decode()
 
             packet = version_protocol.build_DataPacket(
@@ -98,17 +65,23 @@ class versioner:
                 payload
             )
 
-            print(f"Forwarding to {newestServerPacket.serverIP}:{newestServerPacket.serverPORT}")
+            print(f"Forwarding to {newestServerIP}:{newestServerPORT}")
             self.myUDPSocket.sock.sendto(
                 packet.encode(),
-                (newestServerPacket.serverIP, newestServerPacket.serverPORT)
+                (newestServerIP, newestServerPORT)
             )
 
     def listen_for_server_registration(self):
         while self.loopBreak:
-            data,addr = self.myUDPSocketRegistration.receiveData()
-            msg = data.decode()
-            
+            data, addr = self.myUDPSocketRegistration.receiveData()
+            if data is None or addr is None:
+                continue
+
+            try:
+                msg = data.decode()
+            except Exception:
+                continue
+
             # sehr simples Protokoll
             # Beispiel: REGISTER<127.0.0.1><6000>
             if msg.startswith("REGISTER"):
@@ -119,7 +92,7 @@ class versioner:
 
                     self.register_server(ip, port)
 
-                except:
+                except Exception:
                     print("Invalid REGISTER packet")
 
             elif msg.startswith("DEREGISTER"):
@@ -130,7 +103,7 @@ class versioner:
 
                     self.deregister_server(ip, port)
 
-                except:
+                except Exception:
                     print("Invalid DEREGISTER packet")
         
 
@@ -143,17 +116,3 @@ class versioner:
 
         t1.join()
         t2.join()
-
-
-def main():
-    v = versioner("127.0.0.1", 5005)
-
-    print("Versioner läuft...")
-    print("Port 5005 = Data")
-    print("Port 55 = Registration")
-
-    v.start()
-
-
-if __name__ == "__main__":
-    main()
